@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 /**
  * Created by Yaroslav on 18.05.2015.
@@ -38,7 +37,7 @@ public class SuperCalendar {
         while (true) {
 
             if ((args != null) && ((args.length == 3) || (args.length == 1))) {
-                if ((args.length == 1) && (args[0].contains("/")) && !(args.length == 3)) {
+                if ((args.length == 1) && (args[0].contains("/"))) {
                     yearMonthDay = args[0];
                     args = null;
                 } else {
@@ -91,7 +90,7 @@ public class SuperCalendar {
                 if (numberWeek == 1) {
                     numberDay = 0;
                 }
-        
+
                 week = 1;
 
                 while (week <= 7) {
@@ -112,7 +111,7 @@ public class SuperCalendar {
                                             "\u001B[30m");
                                     week++;
                                     continue;
-                                } 
+                                }
 
                                 if ((numberDay % 6) == numberWeek) {
                                     System.out.print("\u001B[32m" + "\t" +
@@ -120,7 +119,7 @@ public class SuperCalendar {
                                             "\u001B[30m");
                                     week++;
                                     continue;
-                                } 
+                                }
 
                                 if ((numberDay % 7) == 0) {
                                     System.out.print("\u001B[32m" + "\t" +
@@ -157,6 +156,7 @@ public class SuperCalendar {
 
     /**
      * get year month day from string
+     *
      * @param val string contain year month day or empty string
      * @return list
      */
@@ -258,62 +258,62 @@ public class SuperCalendar {
 
     public static int getMonth(String value) {
         if ((value.compareTo("1") == 0) || (value.compareTo("01") == 0) ||
-            (value.compareTo("jan") == 0) || (value.compareTo("january") == 0)) {
+                (value.compareTo("jan") == 0) || (value.compareTo("january") == 0)) {
             return 0;
         }
 
         if ((value.compareTo("2") == 0) || (value.compareTo("02") == 0) ||
-            (value.compareTo("feb") == 0) || (value.compareTo("february") == 0)) {
+                (value.compareTo("feb") == 0) || (value.compareTo("february") == 0)) {
             return 1;
         }
 
         if ((value.compareTo("3") == 0) || (value.compareTo("03") == 0) ||
-            (value.compareTo("mar") == 0) || (value.compareTo("march") == 0)) {
+                (value.compareTo("mar") == 0) || (value.compareTo("march") == 0)) {
             return 2;
         }
 
         if ((value.compareTo("4") == 0) || (value.compareTo("04") == 0) ||
-            (value.compareTo("apr") == 0) || (value.compareTo("april") == 0)){
+                (value.compareTo("apr") == 0) || (value.compareTo("april") == 0)) {
             return 3;
         }
 
         if ((value.compareTo("5") == 0) || (value.compareTo("05") == 0) ||
-            (value.compareTo("may") == 0)) {
+                (value.compareTo("may") == 0)) {
             return 4;
         }
 
         if ((value.compareTo("6") == 0) || (value.compareTo("06") == 0) ||
-            (value.compareTo("jun") == 0) || (value.compareTo("june") == 0)){
+                (value.compareTo("jun") == 0) || (value.compareTo("june") == 0)) {
             return 5;
         }
 
         if ((value.compareTo("7") == 0) || (value.compareTo("07") == 0) ||
-            (value.compareTo("jul") == 0) || (value.compareTo("july") == 0)) {
+                (value.compareTo("jul") == 0) || (value.compareTo("july") == 0)) {
             return 6;
         }
 
-        if ((value.compareTo("8") == 0) || (value.compareTo("08") == 0) || 
-            (value.compareTo("aug") == 0) || (value.compareTo("august") == 0)) {
+        if ((value.compareTo("8") == 0) || (value.compareTo("08") == 0) ||
+                (value.compareTo("aug") == 0) || (value.compareTo("august") == 0)) {
             return 7;
         }
 
         if ((value.compareTo("9") == 0) || (value.compareTo("09") == 0) ||
-            (value.compareTo("sep") == 0) || (value.compareTo("september") == 0)) {
+                (value.compareTo("sep") == 0) || (value.compareTo("september") == 0)) {
             return 8;
         }
 
         if ((value.compareTo("10") == 0) || (value.compareTo("oct") == 0) ||
-            (value.compareTo("october") == 0)) {
+                (value.compareTo("october") == 0)) {
             return 9;
         }
 
         if ((value.compareTo("11") == 0) || (value.compareTo("nov") == 0) ||
-            (value.compareTo("november") == 0)) {
+                (value.compareTo("november") == 0)) {
             return 10;
         }
 
         if ((value.compareTo("12") == 0) || (value.compareTo("dec") == 0) ||
-            (value.compareTo("december") == 0))  {
+                (value.compareTo("december") == 0)) {
             return 11;
         }
 
@@ -322,6 +322,7 @@ public class SuperCalendar {
 
     /**
      * check string date with the help of regexp
+     *
      * @param date string yyyy mm dd, yyyy mmm dd, yyyy mmmmm dd
      * @return true or false
      */
