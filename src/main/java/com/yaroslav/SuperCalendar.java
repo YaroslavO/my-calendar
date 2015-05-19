@@ -14,7 +14,6 @@ public class SuperCalendar {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int week;
         int month;
         int year;
         int day;
@@ -24,8 +23,7 @@ public class SuperCalendar {
         int dayOfMonthBefore;
         String yearMonthDay;
 
-        while (true) {
-
+        do {
             if ((args != null) && ((args.length == 3) || (args.length == 1))) {
                 if ((args.length == 1) && (args[0].contains("/"))) {
                     yearMonthDay = args[0];
@@ -71,75 +69,99 @@ public class SuperCalendar {
 
             dayOfMonthBefore = getCountDeys(calendar);
             int countWeek = getCountWeeks(calendar);
-            int numberDay = 1;
 
-            System.out.println("\u001B[32m\tSun\u001B[34m\tMon\tTue\tWed\tThu\tFri\u001B[32m\tSat\u001B[30m");
+            displayCalendar(day, dayOfWeek, countDayOfMonth, dayOfMonthBefore, countWeek);
 
-            for (int numberWeek = 1; numberWeek <= countWeek; numberWeek++) {
-                if (numberWeek == 1) {
-                    numberDay = 0;
-                }
+        } while (checkCommand());
 
-                week = 1;
+    }
 
-                while (week <= 7) {
-                    numberDay += 1;
+    private static void displayCalendar(int day, int dayOfWeek,
+                                        int countDayOfMonth, int dayOfMonthBefore, int countWeek) {
+        int week;
+        int numberDay = 0;
 
-                    if (numberDay <= dayOfWeek) {
-                        System.out.print("\u001B[33m" + "\t" +
-                                String.valueOf(dayOfMonthBefore - dayOfWeek + numberDay) +
-                                "\u001B[30m");
-                    } else {
-                        if ((numberDay - dayOfWeek) <= countDayOfMonth) {
-                            if ((numberDay - dayOfWeek) == day) {
-                                System.out.print("\u001B[31m\t" + String.valueOf(numberDay - dayOfWeek) + "\u001B[30m");
-                            } else {
-                                if ((numberDay % 6) == 0 && (numberWeek == 6)) {
-                                    System.out.print("\u001B[32m" + "\t" +
-                                            String.valueOf(numberDay - dayOfWeek) +
-                                            "\u001B[30m");
-                                    week++;
-                                    continue;
-                                }
+        System.out.println("\u001B[32m\tSun\u001B[34m\tMon\tTue\tWed\tThu\tFri\u001B[32m\tSat\u001B[30m");
 
-                                if ((numberDay % 6) == numberWeek) {
-                                    System.out.print("\u001B[32m" + "\t" +
-                                            String.valueOf(numberDay - dayOfWeek) +
-                                            "\u001B[30m");
-                                    week++;
-                                    continue;
-                                }
+        for (int numberWeek = 1; numberWeek <= countWeek; numberWeek++) {
+            week = 1;
 
-                                if ((numberDay % 7) == 0) {
-                                    System.out.print("\u001B[32m" + "\t" +
-                                            String.valueOf(numberDay - dayOfWeek) +
-                                            "\u001B[30m");
-                                    week++;
-                                    continue;
-                                }
+            while (week <= 7) {
+                numberDay += 1;
 
-                                System.out.print("\t" + String.valueOf(numberDay - dayOfWeek));
-                            }
+                if (numberDay <= dayOfWeek) {
+                    displayDayOfMonthBefore(dayOfWeek, dayOfMonthBefore, numberDay);
+                } else {
+                    if ((numberDay - dayOfWeek) <= countDayOfMonth) {
+                        if ((numberDay - dayOfWeek) == day) {
+                            System.out.print("\u001B[31m\t" + String.valueOf(numberDay - dayOfWeek) + "\u001B[30m");
                         } else {
-                            System.out.print("\u001B[33m" + "\t" +
-                                    String.valueOf(numberDay - countDayOfMonth - dayOfWeek) +
-                                    "\u001B[30m");
+                            if (displayDayOfWeekend(dayOfWeek, numberDay, numberWeek)) {
+                                week++;
+                                continue;
+                            }
+
+                            displayDayOfThisMonth(dayOfWeek, numberDay);
                         }
+                    } else {
+                        displayDayOfMonthAfter(dayOfWeek, countDayOfMonth, numberDay);
                     }
-
-                    week++;
                 }
-                System.out.println("\n");
-            }
 
-            System.out.println("Enter stop for exit");
-            yearMonthDay = in.nextLine();
-
-            if (yearMonthDay.contains("stop")) {
-                break;
+                week++;
             }
+            System.out.print("\n");
+        }
+    }
+
+    private static void displayDayOfThisMonth(int dayOfWeek, int numberDay) {
+        System.out.print("\t" + String.valueOf(numberDay - dayOfWeek));
+    }
+
+    private static void displayDayOfMonthAfter(int dayOfWeek, int countDayOfMonth, int numberDay) {
+        System.out.print("\u001B[33m" + "\t" +
+                String.valueOf(numberDay - countDayOfMonth - dayOfWeek) +
+                "\u001B[30m");
+    }
+
+    private static boolean displayDayOfWeekend(int dayOfWeek, int numberDay, int numberWeek) {
+        if ((numberDay % 6) == 0 && (numberWeek == 6)) {
+            System.out.print("\u001B[32m" + "\t" +
+                    String.valueOf(numberDay - dayOfWeek) +
+                    "\u001B[30m");
+            return true;
         }
 
+        if ((numberDay % 6) == numberWeek) {
+            System.out.print("\u001B[32m" + "\t" +
+                    String.valueOf(numberDay - dayOfWeek) +
+                    "\u001B[30m");
+            return true;
+        }
+
+        if ((numberDay % 7) == 0) {
+            System.out.print("\u001B[32m" + "\t" +
+                    String.valueOf(numberDay - dayOfWeek) +
+                    "\u001B[30m");
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void displayDayOfMonthBefore(int dayOfWeek, int dayOfMonthBefore, int numberDay) {
+        System.out.print("\u001B[33m" + "\t" +
+                String.valueOf(dayOfMonthBefore - dayOfWeek + numberDay) +
+                "\u001B[30m");
+    }
+
+    private static boolean checkCommand() {
+        Scanner in = new Scanner(System.in);
+        String yearMonthDay;
+        System.out.println("Enter stop for exit");
+        yearMonthDay = in.nextLine();
+
+        return !yearMonthDay.contains("stop");
     }
 
     /**
