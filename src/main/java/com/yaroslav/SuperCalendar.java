@@ -13,25 +13,15 @@ import java.util.regex.Pattern;
 public class SuperCalendar {
 
     public static void main(String[] args) {
-
         Scanner in = new Scanner(System.in);
-
         int week;
-
         int month;
-
         int year;
-
         int day;
-
         Calendar calendar;
-
         int dayOfWeek;
-
         int countDayOfMonth;
-
         int dayOfMonthBefore;
-
         String yearMonthDay;
 
         while (true) {
@@ -81,7 +71,6 @@ public class SuperCalendar {
 
             dayOfMonthBefore = getCountDeys(calendar);
             int countWeek = getCountWeeks(calendar);
-
             int numberDay = 1;
 
             System.out.println("\u001B[32m\tSun\u001B[34m\tMon\tTue\tWed\tThu\tFri\u001B[32m\tSat\u001B[30m");
@@ -144,7 +133,6 @@ public class SuperCalendar {
             }
 
             System.out.println("Enter stop for exit");
-
             yearMonthDay = in.nextLine();
 
             if (yearMonthDay.contains("stop")) {
