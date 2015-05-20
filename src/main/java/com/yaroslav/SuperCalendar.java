@@ -14,13 +14,13 @@ public class SuperCalendar {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int month;
-        int year;
-        int day;
+        int currentMonth;
+        int currentYear;
+        int currentDay;
         Calendar calendar;
         int dayOfWeek;
         int countDayOfMonth;
-        int dayOfMonthBefore;
+        int countDayOfMonthBefore;
         String yearMonthDay;
 
         do {
@@ -46,7 +46,7 @@ public class SuperCalendar {
                 continue;
             }
 
-            ArrayList<Integer> yMDList = getYearMonthDay(yearMonthDay);
+            ArrayList<Integer> yMDList = getYearMonthDayList(yearMonthDay);
 
             if (yMDList == null) {
                 System.out.println("Oooops.. :(");
@@ -58,46 +58,46 @@ public class SuperCalendar {
                 continue;
             }
 
-            year = yMDList.get(0);
-            month = yMDList.get(1);
-            day = yMDList.get(2);
+            currentYear = yMDList.get(0);
+            currentMonth = yMDList.get(1);
+            currentDay = yMDList.get(2);
 
-            calendar = new GregorianCalendar(year, month, day);
+            calendar = new GregorianCalendar(currentYear, currentMonth, currentDay);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
             dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
             countDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-            dayOfMonthBefore = getCountDeys(calendar);
+            countDayOfMonthBefore = getCountDeys(calendar);
             int countWeek = getCountWeeks(calendar);
 
-            displayCalendar(day, dayOfWeek, countDayOfMonth, dayOfMonthBefore, countWeek);
+            displayCalendar(currentDay, dayOfWeek, countDayOfMonth, countDayOfMonthBefore, countWeek);
 
         } while (checkCommand());
 
     }
 
-    private static void displayCalendar(int day, int dayOfWeek,
-                                        int countDayOfMonth, int dayOfMonthBefore, int countWeek) {
-        int week;
+    private static void displayCalendar(int currentDay, int dayOfWeek,
+                                        int countDayOfMonth, int countDayOfMonthBefore, int countWeek) {
+        int numberDayOfWeek;
         int numberDay = 0;
 
         System.out.println("\u001B[32m\tSun\u001B[34m\tMon\tTue\tWed\tThu\tFri\u001B[32m\tSat\u001B[30m");
 
         for (int numberWeek = 1; numberWeek <= countWeek; numberWeek++) {
-            week = 1;
+            numberDayOfWeek = 1;
 
-            while (week <= 7) {
+            while (numberDayOfWeek <= 7) {
                 numberDay += 1;
 
                 if (numberDay <= dayOfWeek) {
-                    displayDayOfMonthBefore(dayOfWeek, dayOfMonthBefore, numberDay);
+                    displayDayOfMonthBefore(dayOfWeek, countDayOfMonthBefore, numberDay);
                 } else {
                     if ((numberDay - dayOfWeek) <= countDayOfMonth) {
-                        if ((numberDay - dayOfWeek) == day) {
+                        if ((numberDay - dayOfWeek) == currentDay) {
                             displayDayThisMonthIsWeekend(dayOfWeek, numberDay);
                         } else {
                             if (displayDayOfWeekend(dayOfWeek, numberDay, numberWeek)) {
-                                week++;
+                                numberDayOfWeek++;
                                 continue;
                             }
 
@@ -108,7 +108,7 @@ public class SuperCalendar {
                     }
                 }
 
-                week++;
+                numberDayOfWeek++;
             }
             System.out.print("\n");
         }
@@ -153,19 +153,19 @@ public class SuperCalendar {
         return false;
     }
 
-    private static void displayDayOfMonthBefore(int dayOfWeek, int dayOfMonthBefore, int numberDay) {
+    private static void displayDayOfMonthBefore(int dayOfWeek, int countDayOfMonthBefore, int numberDay) {
         System.out.print("\u001B[33m" + "\t" +
-                String.valueOf(dayOfMonthBefore - dayOfWeek + numberDay) +
+                String.valueOf(countDayOfMonthBefore - dayOfWeek + numberDay) +
                 "\u001B[30m");
     }
 
     private static boolean checkCommand() {
         Scanner in = new Scanner(System.in);
-        String yearMonthDay;
+        String command;
         System.out.println("Enter stop for exit");
-        yearMonthDay = in.nextLine();
+        command = in.nextLine();
 
-        return !yearMonthDay.contains("stop");
+        return !command.contains("stop");
     }
 
     /**
@@ -174,10 +174,10 @@ public class SuperCalendar {
      * @param val string contain year month day or empty string
      * @return list
      */
-    public static ArrayList<Integer> getYearMonthDay(String val) {
+    public static ArrayList<Integer> getYearMonthDayList(String val) {
         ArrayList<Integer> paramList = new ArrayList<Integer>();
 
-        if ((val.length() == 0) || (val == null)) {
+        if (val.length() == 0) {
             paramList.add(2015);
             paramList.add(5);
             paramList.add(19);
