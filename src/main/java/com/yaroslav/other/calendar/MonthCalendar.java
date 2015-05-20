@@ -3,6 +3,7 @@ package com.yaroslav.other.calendar;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by employee on 5/20/15.
@@ -32,7 +33,10 @@ public class MonthCalendar {
 
     @Override
     public String toString() {
-        return weeks.toString();
+        return weeks
+                .stream()
+                .map(p -> p.toString())
+                .collect(Collectors.joining("/n"));
     }
 
     public int getCountWeeks(Calendar calendar) {

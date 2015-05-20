@@ -84,7 +84,7 @@ public class InputReader {
 
     }
 
-    public static int getMonth(String value) {
+    public int getMonth(String value) {
         if ((value.compareTo("1") == 0) || (value.compareTo("01") == 0) ||
                 (value.compareTo("jan") == 0) || (value.compareTo("january") == 0)) {
             return 0;
