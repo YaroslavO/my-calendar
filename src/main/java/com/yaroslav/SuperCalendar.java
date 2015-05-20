@@ -94,7 +94,7 @@ public class SuperCalendar {
                 } else {
                     if ((numberDay - dayOfWeek) <= countDayOfMonth) {
                         if ((numberDay - dayOfWeek) == day) {
-                            System.out.print("\u001B[31m\t" + String.valueOf(numberDay - dayOfWeek) + "\u001B[30m");
+                            displayDayThisMonthIsWeekend(dayOfWeek, numberDay);
                         } else {
                             if (displayDayOfWeekend(dayOfWeek, numberDay, numberWeek)) {
                                 week++;
@@ -112,6 +112,10 @@ public class SuperCalendar {
             }
             System.out.print("\n");
         }
+    }
+
+    private static void displayDayThisMonthIsWeekend(int dayOfWeek, int numberDay) {
+        System.out.print("\u001B[31m\t" + String.valueOf(numberDay - dayOfWeek) + "\u001B[30m");
     }
 
     private static void displayDayOfThisMonth(int dayOfWeek, int numberDay) {
