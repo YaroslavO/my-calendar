@@ -1,5 +1,6 @@
 package com.yaroslav.other.calendar;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
 public class MonthCalendar {
     private List<Week> weeks;
 
-    private Date firstDateOfMonth() {
-        return new Date();
-    }
+//    private Calendar firstDateOfMonth() {
+//        return new Calendar();
+//    }
 
-    public void init(Date date) {
+    public void init(Calendar date) {
 
     }
 

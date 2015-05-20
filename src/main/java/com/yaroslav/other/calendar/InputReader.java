@@ -1,6 +1,6 @@
 package com.yaroslav.other.calendar;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class InputReader {
 
-    public Date getFirstDayOfMonth(String []args) {
+    public Calendar getFirstDayOfMonth(String []args) {
 
         Scanner in = new Scanner(System.in);
         String yearMonthDay = "";
@@ -38,7 +38,7 @@ public class InputReader {
         return (args != null) && ((args.length == 3) || (args.length == 1));
     }
 
-    public Date getDateWithString(String stringDate) {
+    public Calendar getDateWithString(String stringDate) {
         int year = 2015;
         int month = 5;
         int day = 9;
@@ -80,7 +80,7 @@ public class InputReader {
             }
         }
 
-        return new Date(new GregorianCalendar(year, month, day).getTime().getDate());
+        return new GregorianCalendar(year, month, day);
 
     }
 

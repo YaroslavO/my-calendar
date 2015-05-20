@@ -1,5 +1,6 @@
 package com.yaroslav.other.calendar;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -7,10 +8,10 @@ import java.util.Date;
  */
 public class WeekDay {
     private WeekDayType type;
-    private Date date;
+    private Calendar date;
     private Week week;
 
-    public WeekDay(Date date) {
+    public WeekDay(Calendar date) {
         this.date = date;
     }
 

@@ -1,8 +1,6 @@
 package com.yaroslav.other.calendar;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by employee on 5/20/15.
@@ -11,18 +9,18 @@ import java.util.List;
 public class Week {
     private static final int COUNT_WEEK_DAYS = 7;
     private List<WeekDay> days;
-    private Date date;
+    private Calendar date;
 
     @Override
     public String toString() {
         return "";//days.stream().forEach();
     }
 
-    public void init(Date date) {
+    public void init(Calendar date) {
         days = new ArrayList<WeekDay>();
         for (int numberDay = 1; numberDay <= COUNT_WEEK_DAYS; numberDay++) {
             days.add(new WeekDay(date));
-            date = new Date(date.getDate() + 1);
+            date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
         }
         this.date = date;
     }
