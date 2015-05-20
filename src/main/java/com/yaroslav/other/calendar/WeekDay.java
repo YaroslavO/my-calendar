@@ -11,12 +11,14 @@ public class WeekDay {
     private Calendar date;
     private Week week;
 
-    public WeekDay(Calendar date) {
+    public WeekDay(Calendar date, Week week) {
         this.date = date;
+        this.week = week;
+        type = WeekDayType.values()[date.get(Calendar.DAY_OF_WEEK)];
     }
 
     @Override
     public String toString() {
-        return date.toString();
+        return (type.isWeekendDay()) ? date.toString() : "\u001B[32m" + "\t" + date.toString() + "\u001B[30m";
     }
 }

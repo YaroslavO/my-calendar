@@ -5,7 +5,6 @@ import java.util.*;
 /**
  * Created by employee on 5/20/15.
  */
-// TODO refactor change Date on Calendar
 public class Week {
     private static final int COUNT_WEEK_DAYS = 7;
     private List<WeekDay> days;
@@ -19,7 +18,7 @@ public class Week {
     public void init(Calendar date) {
         days = new ArrayList<WeekDay>();
         for (int numberDay = 1; numberDay <= COUNT_WEEK_DAYS; numberDay++) {
-            days.add(new WeekDay(date));
+            days.add(new WeekDay(date, this));
             date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
         }
         this.date = date;
