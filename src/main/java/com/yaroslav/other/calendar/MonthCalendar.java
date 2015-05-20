@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
  * Created by employee on 5/20/15.
  */
 public class MonthCalendar {
+    private final int TWO_STEP_BACK = 2;
+
     private List<Week> weeks;
     private Calendar date;
 
@@ -30,7 +32,7 @@ public class MonthCalendar {
             if (count == 1) {
                 currentWeek.init(date);
             } else {
-                currentWeek = weeks.get(count - 1).createNextWeek();
+                currentWeek = weeks.get(count - TWO_STEP_BACK).createNextWeek();
             }
             weeks.add(currentWeek);
         }
@@ -47,9 +49,9 @@ public class MonthCalendar {
     public int getCountWeeks(Calendar calendar) {
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         int cntDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int countWeek = (dayOfWeek + cntDayOfMonth) / 7;
+        int countWeek = (dayOfWeek + cntDayOfMonth) / Calendar.SATURDAY;
 
-        if (((dayOfWeek + cntDayOfMonth) % 7) != 0) {
+        if (((dayOfWeek + cntDayOfMonth) % Calendar.SATURDAY) != 0) {
             countWeek += 1;
         }
 
