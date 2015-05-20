@@ -26,8 +26,10 @@ public class MonthCalendar {
 
     public void init(Calendar date) {
         this.date = date;
+        firstDateOfMonth();
         Week currentWeek;
-        for (int count = 1; count <= getCountWeeks(date); count++) {
+        int countWeeks = getCountWeeks(date);
+        for (int count = 1; count <= countWeeks; count++) {
             currentWeek = new Week();
             if (count == 1) {
                 currentWeek.init(date);

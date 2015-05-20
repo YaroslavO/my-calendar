@@ -19,8 +19,10 @@ public class WeekDay {
 
     @Override
     public String toString() {
-        return !(type.isWeekendDay()) ?
-                String.valueOf(date.get(Calendar.DAY_OF_MONTH)) :
-                "\u001B[32m" + "\t" + String.valueOf(date.get(Calendar.DAY_OF_MONTH)) + "\u001B[30m";
+        if (type.isWeekendDay()) {
+            return "\u001B[32m" + "\t" + String.valueOf(date.get(Calendar.DAY_OF_MONTH)) + "\u001B[30m";
+        } else {
+            return "\t\u001B[30m" + String.valueOf(date.get(Calendar.DAY_OF_MONTH));
+        }
     }
 }
