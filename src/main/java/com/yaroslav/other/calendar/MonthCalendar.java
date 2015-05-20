@@ -1,5 +1,6 @@
 package com.yaroslav.other.calendar;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,10 @@ import java.util.stream.Collectors;
 public class MonthCalendar {
     private List<Week> weeks;
     private Calendar date;
+
+    public MonthCalendar() {
+        weeks = new ArrayList<>();
+    }
 
     private Calendar firstDateOfMonth() {
         date.set(Calendar.DAY_OF_MONTH, 1);
