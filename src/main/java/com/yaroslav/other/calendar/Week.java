@@ -21,7 +21,7 @@ public class Week {
 
     public void init(Calendar date) {
         days = new ArrayList<WeekDay>();
-        for (int numberDay = 1; numberDay <= COUNT_WEEK_DAYS; numberDay++) {
+        for (int numberDay = date.get(Calendar.DAY_OF_WEEK); numberDay <= COUNT_WEEK_DAYS; numberDay++) {
             days.add(new WeekDay(date, this));
             date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
         }

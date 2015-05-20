@@ -43,7 +43,7 @@ public class MonthCalendar {
         return weeks
                 .stream()
                 .map(p -> p.toString())
-                .collect(Collectors.joining("/n"));
+                .collect(Collectors.joining("\n\n"));
     }
 
     public int getCountWeeks(Calendar calendar) {

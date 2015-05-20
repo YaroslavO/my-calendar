@@ -12,6 +12,6 @@ public class CalendarApplication {
         Calendar customerCalendar = inputReader.getFirstDayOfMonth(args);
         MonthCalendar monthCalendar = new MonthCalendar();
         monthCalendar.init(customerCalendar);
-        System.out.println(customerCalendar.toString());
+        System.out.println(monthCalendar.toString());
     }
 }
