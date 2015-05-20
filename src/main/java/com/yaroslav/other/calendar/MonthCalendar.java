@@ -9,13 +9,15 @@ import java.util.List;
  */
 public class MonthCalendar {
     private List<Week> weeks;
+    private Calendar date;
 
-//    private Calendar firstDateOfMonth() {
-//        return new Calendar();
-//    }
+    private Calendar firstDateOfMonth() {
+        date.set(Calendar.DAY_OF_MONTH, 1);
+        return date;
+    }
 
     public void init(Calendar date) {
-
+        this.date = date;
     }
 
     @Override

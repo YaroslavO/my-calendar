@@ -1,6 +1,7 @@
 package com.yaroslav.other.calendar;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by employee on 5/20/15.
@@ -12,7 +13,10 @@ public class Week {
 
     @Override
     public String toString() {
-        return "";//days.stream().forEach();
+        return days
+                .stream()
+                .map(p -> p.toString())
+                .collect(Collectors.joining(" "));//days.stream().forEach();
     }
 
     public void init(Calendar date) {
