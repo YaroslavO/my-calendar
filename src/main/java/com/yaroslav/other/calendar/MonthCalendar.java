@@ -13,7 +13,7 @@ public class MonthCalendar {
     public static final String COLOR_GREEN = "\u001B[32m";
     public static final String COLOR_RED = "\u001B[31m";
     public static final String COLOR_YELLOW = "\u001B[33m";
-    public static final String HTML_TABLE = "<>";
+
     private List<Week> weeks;
     private Calendar date;
 
@@ -24,8 +24,9 @@ public class MonthCalendar {
     public void init(Calendar date) {
         this.date = date;
         Week currentWeek;
-        int countWeeks = getCountWeeks(date) - 1;
         currentWeek = new Week(date);
+        date.set(Calendar.DAY_OF_MONTH, 1);
+        int countWeeks = getCountWeeks(date) - 1;
         currentWeek.init();
         weeks.add(currentWeek);
         for (int count = 0; count < countWeeks; count++) {

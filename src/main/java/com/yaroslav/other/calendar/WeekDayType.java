@@ -39,4 +39,8 @@ public enum WeekDayType {
                 title:
                 MonthCalendar.COLOR_GREEN + title + MonthCalendar.COLOR_BLACK;
     }
+
+    public String toHTMLTag() {
+        return "<th>" + title + "</th>";
+    }
 }

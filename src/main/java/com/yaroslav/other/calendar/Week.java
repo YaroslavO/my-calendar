@@ -46,7 +46,7 @@ public class Week {
             int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK);
             date.set(Calendar.MONTH, date.get(Calendar.MONTH) - 1);
             int countDayOFWeekMonthBefore = date.getActualMaximum(Calendar.DAY_OF_MONTH);
-            date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek);
+            date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek + 2);
 
             for (int numberDay = 1; numberDay < numberDayOfWeek;
                  numberDay++) {

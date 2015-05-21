@@ -17,13 +17,34 @@ public class WeekDay {
         type = WeekDayType.values()[date.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
+    public boolean isTheCurrentDay() {
+        return week.getDate().compareTo(date) == 0;
+    }
+
+    public boolean isCurrentMonth() {
+        return week.getDate().get(Calendar.MONTH) != date.get(Calendar.MONTH);
+    }
+
     @Override
     public String toString() {
-        if (week.getDate().compareTo(date) == 0) {
+        String result = "";
+
+        result += isTheCurrentDay() ? MonthCalendar.COLOR_RED : "";
+        result += type.isWeekendDay() ? MonthCalendar.COLOR_GREEN : "";
+        result += isCurrentMonth() ? MonthCalendar.COLOR_YELLOW : "";
+
+        result += "\t";
+        result += date.get(Calendar.DAY_OF_MONTH);
+
+        result += MonthCalendar.COLOR_BLACK;
+
+        return result;
+        /*
+        if (isTheCurrentDay()) {
             return MonthCalendar.COLOR_RED + "\t" + date.get(Calendar.DAY_OF_MONTH) +
                     MonthCalendar.COLOR_BLACK;
         }
-        if (week.getDate().get(Calendar.MONTH) != date.get(Calendar.MONTH)) {
+        if (isCurrentMonth()) {
             return MonthCalendar.COLOR_YELLOW + "\t" + date.get(Calendar.DAY_OF_MONTH) +
                     MonthCalendar.COLOR_BLACK;
         }
@@ -33,5 +54,11 @@ public class WeekDay {
         } else {
             return MonthCalendar.COLOR_BLACK + "\t" + date.get(Calendar.DAY_OF_MONTH);
         }
+        */
+
     }
+
+//    public String toHTMLTag() {
+//        return
+//    }
 }
