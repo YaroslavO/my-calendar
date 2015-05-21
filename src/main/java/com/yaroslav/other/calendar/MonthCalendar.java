@@ -1,5 +1,8 @@
 package com.yaroslav.other.calendar;
 
+import org.springframework.web.servlet.ModelAndView;
+import sun.plugin.dom.html.HTMLTableCaptionElement;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,7 +12,6 @@ import java.util.stream.Collectors;
  * Created by employee on 5/20/15.
  */
 public class MonthCalendar {
-    private final int TWO_STEP_BACK = 2;
     public static final String COLOR_BLACK = "\u001B[30m";
     public static final String COLOR_GREEN = "\u001B[32m";
     public static final String COLOR_RED = "\u001B[31m";

@@ -21,5 +21,7 @@ public class CalendarApplication {
         System.out.println("\t" + header);
         System.out.println(monthCalendar.toString());
         int i = 1;
+        FileManager fileManager = new FileManager();
+        fileManager.saveToFile("calendar.html", monthCalendar.toString());
     }
 }
