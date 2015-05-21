@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
  * Created by employee on 5/20/15.
  */
 public class InputReader {
+    private final int CUSTOM_YEAR = 2015;
+    private final int CUSTOM_MONTH = 5;
+    private final int CUSTOM_DAY = 9;
 
     public Calendar getFirstDayOfMonth(String []args) {
 
@@ -41,10 +44,14 @@ public class InputReader {
     }
 
     public Calendar getDateWithString(String stringDate) {
-        int year = 2015;
-        int month = 5;
-        int day = 9;
+        int year = CUSTOM_YEAR;
+        int month = CUSTOM_MONTH;
+        int day = CUSTOM_DAY;
         int count = 1;
+
+        if (stringDate.contains("/")) {
+            stringDate = stringDate.replace("/", " ");
+        }
 
         if (stringDate.contains(" ")) {
             for (String item : stringDate.split(" ")) {
@@ -64,26 +71,7 @@ public class InputReader {
             }
         }
 
-        if (stringDate.contains("/")) {
-            for (String item : stringDate.split("/")) {
-                if (count == 1) {
-                    year = Integer.valueOf(item);
-                }
-
-                if (count == 2) {
-                    month = getMonth(item);
-                }
-
-                if (count == 3) {
-                    day = Integer.valueOf(item);
-                }
-
-                count++;
-            }
-        }
-
         return new GregorianCalendar(year, month, day);
-
     }
 
     public int getMonth(String value) {

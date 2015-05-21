@@ -6,9 +6,12 @@ import java.util.Calendar;
  * Created by employee on 5/20/15.
  */
 public enum WeekDayType {
-    SUNDAY(Calendar.SUNDAY, "SUN", true), MONDAY(Calendar.MONDAY, "MON", false),
-    TUESDAY(Calendar.TUESDAY, "TUE", false), WEDNESDAY(Calendar.WEDNESDAY, "WED", false),
-    THURSDAY(Calendar.THURSDAY, "THU", false), FRIDAY(Calendar.FRIDAY, "FRI", false),
+    SUNDAY(Calendar.SUNDAY, "SUN", true),
+    MONDAY(Calendar.MONDAY, "MON", false),
+    TUESDAY(Calendar.TUESDAY, "TUE", false),
+    WEDNESDAY(Calendar.WEDNESDAY, "WED", false),
+    THURSDAY(Calendar.THURSDAY, "THU", false),
+    FRIDAY(Calendar.FRIDAY, "FRI", false),
     SATURDAY(Calendar.SATURDAY, "SAT", true);
 
     private int id;
@@ -32,6 +35,8 @@ public enum WeekDayType {
 
     @Override
     public String toString() {
-        return !(this.weekendDay) ? "\t" + title: "\u001B[32m" + "\t" + title + "\u001B[30m";
+        return !(this.weekendDay) ?
+                title:
+                MonthCalendar.COLOR_GREEN + title + MonthCalendar.COLOR_BLACK;
     }
 }

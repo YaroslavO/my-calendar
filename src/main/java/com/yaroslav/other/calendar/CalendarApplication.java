@@ -17,8 +17,8 @@ public class CalendarApplication {
         String Title = Arrays.asList(WeekDayType.values())
                 .stream()
                 .map(p -> p.toString())
-                .collect(Collectors.joining());
-        System.out.println(Title);
+                .collect(Collectors.joining("\t"));
+        System.out.println("\t" + Title);
         System.out.println(monthCalendar.toString());
     }
 }

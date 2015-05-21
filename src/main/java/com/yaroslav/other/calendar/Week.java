@@ -21,7 +21,7 @@ public class Week {
         return days
                 .stream()
                 .map(p -> p.toString())
-                .collect(Collectors.joining(" "));//days.stream().forEach();
+                .collect(Collectors.joining(" "));
     }
 
     public void init(Calendar date) {

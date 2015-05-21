@@ -2,7 +2,6 @@ package com.yaroslav.other.calendar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,22 +10,25 @@ import java.util.stream.Collectors;
  */
 public class MonthCalendar {
     private final int TWO_STEP_BACK = 2;
+    public static final String COLOR_BLACK = "\u001B[30m";
+    public static final String COLOR_GREEN = "\u001B[32m";
 
     private List<Week> weeks;
     private Calendar date;
 
+
     public MonthCalendar() {
-        weeks = new ArrayList<>();
+        weeks = new ArrayList<Week>();
     }
 
-    private Calendar firstDateOfMonth() {
+    private Calendar setFirstDayInDateOfMonth() {
         date.set(Calendar.DAY_OF_MONTH, 1);
         return date;
     }
 
     public void init(Calendar date) {
         this.date = date;
-        firstDateOfMonth();
+        setFirstDayInDateOfMonth();
         Week currentWeek;
         int countWeeks = getCountWeeks(date);
         for (int count = 1; count <= countWeeks; count++) {

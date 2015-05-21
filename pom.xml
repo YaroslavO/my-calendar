@@ -26,7 +26,7 @@
                     <verbose>true</verbose>
                     <fork>true</fork>
                     <!-- <executable></executable> -->
-                    <compilerVersion>1.8</compilerVersion>
+                    <!--<compilerVersion>1.8</compilerVersion>-->
                 </configuration>
             </plugin>
             <plugin>
