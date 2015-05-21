@@ -18,7 +18,6 @@ public class MonthCalendar {
     private List<Week> weeks;
     private Calendar date;
 
-
     public MonthCalendar() {
         weeks = new ArrayList<Week>();
     }
