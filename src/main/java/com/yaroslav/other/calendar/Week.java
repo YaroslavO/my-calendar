@@ -43,12 +43,12 @@ public class Week {
     public void init() {
         days = new ArrayList<WeekDay>();
         if (date.get(Calendar.DAY_OF_WEEK) > 1) {
-            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK);
+            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK) - 1;
             date.set(Calendar.MONTH, date.get(Calendar.MONTH) - 1);
             int countDayOFWeekMonthBefore = date.getActualMaximum(Calendar.DAY_OF_MONTH);
-            date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek);
+            date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek + 1);
 
-            for (int numberDay = 1; numberDay < numberDayOfWeek;
+            for (int numberDay = 1; numberDay <= numberDayOfWeek;
                  numberDay++) {
                 days.add(new WeekDay(date, this));
                 date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
