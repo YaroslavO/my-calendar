@@ -14,11 +14,12 @@ public class CalendarApplication {
         Calendar customerCalendar = inputReader.getFirstDayOfMonth(args);
         MonthCalendar monthCalendar = new MonthCalendar();
         monthCalendar.init(customerCalendar);
-        String Title = Arrays.asList(WeekDayType.values())
+        String header = Arrays.asList(WeekDayType.values())
                 .stream()
                 .map(p -> p.toString())
                 .collect(Collectors.joining("\t"));
-        System.out.println("\t" + Title);
+        System.out.println("\t" + header);
         System.out.println(monthCalendar.toString());
+        int i = 1;
     }
 }

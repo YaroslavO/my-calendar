@@ -12,6 +12,8 @@ public class MonthCalendar {
     private final int TWO_STEP_BACK = 2;
     public static final String COLOR_BLACK = "\u001B[30m";
     public static final String COLOR_GREEN = "\u001B[32m";
+    public static final String COLOR_RED = "\u001B[31m";
+    public static final String COLOR_YELLOW = "\u001B[33m";
 
     private List<Week> weeks;
     private Calendar date;
@@ -21,23 +23,15 @@ public class MonthCalendar {
         weeks = new ArrayList<Week>();
     }
 
-    private Calendar setFirstDayInDateOfMonth() {
-        date.set(Calendar.DAY_OF_MONTH, 1);
-        return date;
-    }
-
     public void init(Calendar date) {
         this.date = date;
-        setFirstDayInDateOfMonth();
         Week currentWeek;
         int countWeeks = getCountWeeks(date);
-        for (int count = 1; count <= countWeeks; count++) {
-            currentWeek = new Week();
-            if (count == 1) {
-                currentWeek.init(date);
-            } else {
-                currentWeek = weeks.get(count - TWO_STEP_BACK).createNextWeek();
-            }
+        currentWeek = new Week(date);
+        currentWeek.init(date);
+        weeks.add(currentWeek);
+        for (int count = 0; count < countWeeks; count++) {
+            currentWeek = weeks.get(count).createNextWeek();
             weeks.add(currentWeek);
         }
     }

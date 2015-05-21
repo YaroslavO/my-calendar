@@ -9,12 +9,20 @@ import java.util.stream.Collectors;
 public class Week {
     private static final int COUNT_WEEK_DAYS = 7;
     private List<WeekDay> days;
+    private Calendar date;
+    private Calendar currentDate;
 
-    public Calendar getDate() {
-        return date;
+    public Week() {
+
     }
 
-    private Calendar date;
+    public Week(Calendar date) {
+        this.currentDate = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public Calendar getDate() {
+        return currentDate;
+    }
 
     @Override
     public String toString() {
@@ -24,10 +32,17 @@ public class Week {
                 .collect(Collectors.joining(" "));
     }
 
+    private Calendar setFirstDayInDateOfMonth() {
+        date.set(Calendar.DAY_OF_MONTH, 1);
+        return date;
+    }
+
     public void init(Calendar date) {
         days = new ArrayList<WeekDay>();
+        this.date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+        setFirstDayInDateOfMonth();
         if (date.get(Calendar.DAY_OF_WEEK) > 1) {
-            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK) - 2;
+            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK) + 1;
             date.set(Calendar.MONTH, date.get(Calendar.MONTH) - 1);
             int countDayOFWeekMonthBefore = date.getActualMaximum(Calendar.DAY_OF_MONTH);
             date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek);
@@ -51,7 +66,7 @@ public class Week {
     }
 
     public Week createNextWeek() {
-        Week week = new Week();
+        Week week = new Week(currentDate);
         week.init(date);
         return week;
     }

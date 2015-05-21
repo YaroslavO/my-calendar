@@ -19,6 +19,14 @@ public class WeekDay {
 
     @Override
     public String toString() {
+        if (week.getDate().compareTo(date) == 0) {
+            return MonthCalendar.COLOR_RED + "\t" + date.get(Calendar.DAY_OF_MONTH) +
+                    MonthCalendar.COLOR_BLACK;
+        }
+        if (week.getDate().get(Calendar.MONTH) != date.get(Calendar.MONTH)) {
+            return MonthCalendar.COLOR_YELLOW + "\t" + date.get(Calendar.DAY_OF_MONTH) +
+                    MonthCalendar.COLOR_BLACK;
+        }
         if (type.isWeekendDay()) {
             return MonthCalendar.COLOR_GREEN + "\t" + date.get(Calendar.DAY_OF_MONTH) +
                     MonthCalendar.COLOR_BLACK;
