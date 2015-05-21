@@ -14,14 +14,23 @@ public class CalendarApplication {
         Calendar customerCalendar = inputReader.getFirstDayOfMonth(args);
         MonthCalendar monthCalendar = new MonthCalendar();
         monthCalendar.init(customerCalendar);
+        String fullCommand = "";
+        for (String command: args) {
+            fullCommand += command;
+        }
         String header = Arrays.asList(WeekDayType.values())
                 .stream()
                 .map(p -> p.toString())
                 .collect(Collectors.joining("\t"));
-        System.out.println("\t" + header);
-        System.out.println(monthCalendar.toString());
-        int i = 1;
-        FileManager fileManager = new FileManager();
-        fileManager.saveToFile("calendar.html", monthCalendar.toString());
+        if (fullCommand.contains("--out")) {
+            if (fullCommand.contains("[text]")) {
+                FileManager fileManager = new FileManager();
+                fileManager.saveToFile("calendar.html", monthCalendar.toString());
+            }
+            if (fullCommand.contains("[console]")) {
+                System.out.println("\t" + header);
+                System.out.println(monthCalendar.toString());
+            }
+        }
     }
 }
