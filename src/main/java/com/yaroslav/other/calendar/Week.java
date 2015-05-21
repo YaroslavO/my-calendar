@@ -12,12 +12,15 @@ public class Week {
     private Calendar date;
     private Calendar currentDate;
 
-    public Week() {
-
-    }
-
     public Week(Calendar date) {
         this.currentDate = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+        this.date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+        this.date = setFirstDayInDateOfMonth(this.date);
+    }
+
+    public Week(Calendar currentDate, Calendar nextDate) {
+        this.currentDate = currentDate;
+        date = nextDate;
     }
 
     public Calendar getDate() {
@@ -32,22 +35,20 @@ public class Week {
                 .collect(Collectors.joining(" "));
     }
 
-    private Calendar setFirstDayInDateOfMonth() {
+    private Calendar setFirstDayInDateOfMonth(Calendar date) {
         date.set(Calendar.DAY_OF_MONTH, 1);
         return date;
     }
 
-    public void init(Calendar date) {
+    public void init() {
         days = new ArrayList<WeekDay>();
-        this.date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
-        setFirstDayInDateOfMonth();
         if (date.get(Calendar.DAY_OF_WEEK) > 1) {
-            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK) + 1;
+            int numberDayOfWeek = date.get(Calendar.DAY_OF_WEEK);
             date.set(Calendar.MONTH, date.get(Calendar.MONTH) - 1);
             int countDayOFWeekMonthBefore = date.getActualMaximum(Calendar.DAY_OF_MONTH);
             date.set(Calendar.DAY_OF_MONTH, countDayOFWeekMonthBefore - numberDayOfWeek);
 
-            for (int numberDay = 1; numberDay <= numberDayOfWeek + 1;
+            for (int numberDay = 1; numberDay < numberDayOfWeek;
                  numberDay++) {
                 days.add(new WeekDay(date, this));
                 date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
@@ -61,13 +62,11 @@ public class Week {
             days.add(new WeekDay(date, this));
             date = new GregorianCalendar(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1);
         }
-
-        this.date = date;
     }
 
     public Week createNextWeek() {
-        Week week = new Week(currentDate);
-        week.init(date);
+        Week week = new Week(currentDate, date);
+        week.init();
         return week;
     }
 }
