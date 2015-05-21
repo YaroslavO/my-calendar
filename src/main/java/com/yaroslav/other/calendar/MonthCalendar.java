@@ -9,12 +9,11 @@ import java.util.stream.Collectors;
  * Created by employee on 5/20/15.
  */
 public class MonthCalendar {
-    private final int TWO_STEP_BACK = 2;
     public static final String COLOR_BLACK = "\u001B[30m";
     public static final String COLOR_GREEN = "\u001B[32m";
     public static final String COLOR_RED = "\u001B[31m";
     public static final String COLOR_YELLOW = "\u001B[33m";
-
+    public static final String HTML_TABLE = "<>";
     private List<Week> weeks;
     private Calendar date;
 

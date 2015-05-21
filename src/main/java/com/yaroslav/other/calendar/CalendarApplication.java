@@ -20,6 +20,8 @@ public class CalendarApplication {
                 .collect(Collectors.joining("\t"));
         System.out.println("\t" + header);
         System.out.println(monthCalendar.toString());
+        FileManager fileManager = new FileManager();
+        fileManager.makeFile("table.html", header + monthCalendar.toString());
         int i = 1;
     }
 }
