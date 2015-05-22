@@ -35,11 +35,11 @@ public class ConsoleCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenDayToken(WeekDay day) {
-        return TABS + (day.isTheCurrentDay() ?
+        return (day.isTheCurrentDay() ?
                 COLOR_RED :
                 day.isOtherMonth() ? COLOR_YELLOW :
                         day.getType().isWeekendDay() ? COLOR_GREEN :
-                                COLOR_BLACK);
+                                COLOR_BLACK) + TABS;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ConsoleCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenWeekToken() {
-        return "";
+        return END_LINE;
     }
 
     @Override
