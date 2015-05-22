@@ -1,5 +1,8 @@
 package com.yaroslav.other.calendar;
 
+import com.yaroslav.other.calendar.view.HTMLCalendarRender;
+import com.yaroslav.other.calendar.view.Render;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.stream.Collectors;
@@ -25,7 +28,8 @@ public class CalendarApplication {
         if (fullCommand.contains("--out")) {
             if (fullCommand.contains("[text]")) {
                 FileManager fileManager = new FileManager();
-                fileManager.saveToFile("calendar.html", monthCalendar.toString());
+                Render render = new HTMLCalendarRender();
+                fileManager.saveToFile("calendar.html", render.render(monthCalendar));
             }
             if (fullCommand.contains("[console]")) {
                 System.out.println("\t" + header);

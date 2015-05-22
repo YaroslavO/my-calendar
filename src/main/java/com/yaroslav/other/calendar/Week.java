@@ -25,6 +25,10 @@ public class Week {
         dayOfWeek = nextDate;
     }
 
+    public List<WeekDay> getDays() {
+        return days;
+    }
+
     public Calendar getDate() {
         return currentDate;
     }

@@ -35,12 +35,6 @@ public enum WeekDayType {
 
     @Override
     public String toString() {
-        return !(this.weekendDay) ?
-                title:
-                MonthCalendar.COLOR_GREEN + title + MonthCalendar.COLOR_BLACK;
-    }
-
-    public String toHTMLTag() {
-        return "<th>" + title + "</th>";
+        return title;
     }
 }

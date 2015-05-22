@@ -14,33 +14,12 @@ public class InputReader {
     private final int CUSTOM_MONTH = 5;
     private final int CUSTOM_DAY = 9;
 
-    public Calendar getFirstDayOfMonth(String []args) {
-
+    public Calendar getFirstDayOfMonth(String[] args) {
         Scanner in = new Scanner(System.in);
-        String yearMonthDay = "";
-
-        if (checkArgs(args)) {
-            if (isContainsSlash(args)) {
-                yearMonthDay = args[0];
-            } else {
-                if (args.length == 3) {
-                    yearMonthDay = args[0] + " " + args[1] + " " + args[2];
-                }
-            }
-        } else {
-            System.out.println("Please enter year month day");
-            yearMonthDay = in.nextLine();
-        }
-
+        String yearMonthDay;
+        System.out.println("Please enter year month day");
+        yearMonthDay = in.nextLine();
         return getDateWithString(yearMonthDay);
-    }
-
-    private boolean isContainsSlash(String[] args) {
-        return (args.length == 1) && (args[0].contains("/"));
-    }
-
-    private boolean checkArgs(String[] args) {
-        return (args != null) && ((args.length == 3) || (args.length == 1));
     }
 
     public Calendar getDateWithString(String stringDate) {

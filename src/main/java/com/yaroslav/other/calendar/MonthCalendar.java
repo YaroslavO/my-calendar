@@ -21,6 +21,10 @@ public class MonthCalendar {
         weeks = new ArrayList<Week>();
     }
 
+    public List<Week> getWeeks() {
+        return weeks;
+    }
+
     public void init(Calendar date) {
         this.date = date;
         Week currentWeek;
