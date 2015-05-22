@@ -33,10 +33,10 @@ public abstract class CalendarRender implements Render {
 
     private String getMonthHeader() {
         String header = "";
-        for (String title: Arrays.asList(WeekDayType.values().toString())) {
-            header += getOpenTitleToken(title);
-            header += title;
-            header += getCloseTitleToken(title);
+        for (WeekDayType title: Arrays.asList(WeekDayType.values())) {
+            header += getOpenTitleToken(title.toString());
+            header += title.toString();
+            header += getCloseTitleToken(title.toString());
         }
         return header;
     }
@@ -52,14 +52,14 @@ public abstract class CalendarRender implements Render {
     private String renderDay(WeekDay day) {
         String result = getOpenDayToken(day);
         result += day.getDay().get(Calendar.DAY_OF_MONTH);
-        result += getCloseDayToken(day);
+        result += getCloseDayToken();
         return result;
     }
 
     public abstract String getOpenTitleToken(String title);
     public abstract String getCloseTitleToken(String title);
     public abstract String getOpenDayToken(WeekDay day);
-    public abstract String getCloseDayToken(WeekDay day);
+    public abstract String getCloseDayToken();
     public abstract String getOpenWeekToken();
     public abstract String getCloseWeekToken();
     public abstract String getOpenMonthToken();

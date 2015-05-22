@@ -8,13 +8,16 @@ import java.util.Date;
  */
 public class WeekDay {
     private WeekDayType type;
+    private Calendar day;
+    private Week week;
 
     public Calendar getDay() {
         return day;
     }
 
-    private Calendar day;
-    private Week week;
+    public WeekDayType getType() {
+        return type;
+    }
 
     public WeekDay(Calendar date, Week week) {
         this.day = date;
@@ -25,5 +28,13 @@ public class WeekDay {
     @Override
     public String toString() {
         return String.valueOf(day.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public boolean isOtherMonth() {
+        return week.getDate().get(Calendar.MONTH) != day.get(Calendar.MONTH);
+    }
+
+    public boolean isTheCurrentDay() {
+        return week.getDate().compareTo(day) == 0;
     }
 }

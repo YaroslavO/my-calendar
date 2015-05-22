@@ -22,7 +22,7 @@ public class ConsoleCalendarRender extends CalendarRender {
     }
 
     @Override
-    public String getCloseDayToken(WeekDay day) {
+    public String getCloseDayToken() {
         return null;
     }
 
