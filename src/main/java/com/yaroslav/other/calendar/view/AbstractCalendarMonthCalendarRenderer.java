@@ -11,13 +11,15 @@ import java.util.Calendar;
 /**
  * Created by employee on 5/22/15.
  */
-public abstract class CalendarRender implements Render {
+public abstract class AbstractCalendarMonthCalendarRenderer implements MonthCalendarRenderer {
 
     public String render(MonthCalendar mc){
-        String result = getOpenMonthToken();
+        String result = "";
+        result += getOpenMonthToken();
         result += getMonthHeader();
         result += getWeeks(mc);
         result += getCloseMonthToken();
+
         return result;
     }
 
@@ -28,6 +30,7 @@ public abstract class CalendarRender implements Render {
             weeks += renderWeeks(week);
             weeks += getCloseWeekToken();
         }
+
         return weeks;
     }
 
@@ -38,6 +41,7 @@ public abstract class CalendarRender implements Render {
             header += title.toString();
             header += getCloseTitleToken(title.toString());
         }
+
         return header;
     }
 
@@ -46,15 +50,29 @@ public abstract class CalendarRender implements Render {
         for (WeekDay day: week.getDays()) {
             result += renderDay(day);
         }
+
         return result;
     }
 
     private String renderDay(WeekDay day) {
-        String result = getOpenDayToken(day);
+        String result = "";
+        result += getOpenDayToken(day);
         result += day.getDay().get(Calendar.DAY_OF_MONTH);
         result += getCloseDayToken();
+
         return result;
     }
+
+    public String calculateDayColor(WeekDay day) {
+        if (day.isTheCurrentDay()) return getCurrentDayColor();
+
+        if (day.isOtherMonth()) return getOtherMonthColor();
+
+        return day.getType().isWeekendDay()
+                ? getWeekDayColor()
+                : getDefaultDayColor();
+    }
+
 
     public abstract String getOpenTitleToken(String title);
     public abstract String getCloseTitleToken(String title);
@@ -64,4 +82,8 @@ public abstract class CalendarRender implements Render {
     public abstract String getCloseWeekToken();
     public abstract String getOpenMonthToken();
     public abstract String getCloseMonthToken();
+    public abstract String getCurrentDayColor();
+    public abstract String getOtherMonthColor();
+    public abstract String getWeekDayColor();
+    public abstract String getDefaultDayColor();
 }

@@ -1,12 +1,10 @@
 package com.yaroslav.other.calendar;
 
-import com.yaroslav.other.calendar.view.ConsoleCalendarRender;
-import com.yaroslav.other.calendar.view.HTMLCalendarRender;
-import com.yaroslav.other.calendar.view.Render;
+import com.yaroslav.other.calendar.view.ConsoleAbstractCalendarMonthCalendarRenderer;
+import com.yaroslav.other.calendar.view.HTMLAbstractCalendarMonthCalendarRenderer;
+import com.yaroslav.other.calendar.view.MonthCalendarRenderer;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.stream.Collectors;
 
 /**
  * Created by employee on 5/20/15.
@@ -31,12 +29,12 @@ public class CalendarApplication {
         if (fullCommand.contains(COMMAND_OUT)) {
             if (fullCommand.contains(COMMAND_TEXT)) {
                 FileManager fileManager = new FileManager();
-                Render render = new HTMLCalendarRender();
-                fileManager.saveToFile(FILE_NAME, render.render(monthCalendar));
+                MonthCalendarRenderer monthCalendarRenderer = new HTMLAbstractCalendarMonthCalendarRenderer();
+                fileManager.saveToFile(FILE_NAME, monthCalendarRenderer.render(monthCalendar));
             }
             if (fullCommand.contains(COMMAND_CONSOLE)) {
-                Render render = new ConsoleCalendarRender();
-                System.out.println(render.render(monthCalendar));
+                MonthCalendarRenderer monthCalendarRenderer = new ConsoleAbstractCalendarMonthCalendarRenderer();
+                System.out.println(monthCalendarRenderer.render(monthCalendar));
             }
         }
     }

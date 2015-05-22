@@ -6,7 +6,7 @@ import com.yaroslav.other.calendar.WeekDayType;
 /**
  * Created by employee on 5/22/15.
  */
-public class ConsoleCalendarRender extends CalendarRender {
+public class ConsoleAbstractCalendarMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
 
     public static final String COLOR_BLACK = "\u001B[30m";
     public static final String COLOR_GREEN = "\u001B[32m";
@@ -17,15 +17,14 @@ public class ConsoleCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenTitleToken(String title) {
-        WeekDayType dayType = WeekDayType.FRIDAY;
-        for (WeekDayType weekDayType : WeekDayType.values()) {
-            if (weekDayType.toString().compareTo(title) == 0) {
-                dayType = weekDayType;
-                break;
-            }
-        }
-        return TABS + (dayType.isWeekendDay() ? COLOR_GREEN :
-                COLOR_BLACK);
+        String result = "";
+
+        WeekDayType dayType = WeekDayType.getByTitle(title);
+
+        result += TABS;
+        result += dayType.isWeekendDay() ? COLOR_GREEN: COLOR_BLACK;
+
+        return result;
     }
 
     @Override
@@ -35,11 +34,7 @@ public class ConsoleCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenDayToken(WeekDay day) {
-        return (day.isTheCurrentDay() ?
-                COLOR_RED :
-                day.isOtherMonth() ? COLOR_YELLOW :
-                        day.getType().isWeekendDay() ? COLOR_GREEN :
-                                COLOR_BLACK) + TABS;
+        return calculateDayColor(day) + TABS;
     }
 
     @Override
@@ -65,5 +60,25 @@ public class ConsoleCalendarRender extends CalendarRender {
     @Override
     public String getCloseMonthToken() {
         return "";
+    }
+
+    @Override
+    public String getCurrentDayColor() {
+        return COLOR_RED;
+    }
+
+    @Override
+    public String getOtherMonthColor() {
+        return COLOR_YELLOW;
+    }
+
+    @Override
+    public String getWeekDayColor() {
+        return COLOR_GREEN;
+    }
+
+    @Override
+    public String getDefaultDayColor() {
+        return COLOR_BLACK;
     }
 }

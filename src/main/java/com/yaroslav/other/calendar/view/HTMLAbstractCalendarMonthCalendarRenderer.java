@@ -6,7 +6,7 @@ import com.yaroslav.other.calendar.WeekDayType;
 /**
  * Created by employee on 5/22/15.
  */
-public class HTMLCalendarRender extends CalendarRender {
+public class HTMLAbstractCalendarMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
     public static final String HTML_OPEN_TEG_TD = "<td>";
     public static final String HTML_OPEN_CURRENT_DAY_TEG_TD = "<td style=\"color: red\">";
     public static final String HTML_OPEN_OTHER_MONTH_TEG_TD = "<td style=\"color: grey\">";
@@ -26,15 +26,15 @@ public class HTMLCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenTitleToken(String title) {
-        WeekDayType dayType = WeekDayType.FRIDAY;
-        for (WeekDayType weekDayType : WeekDayType.values()) {
-            if (weekDayType.toString().compareTo(title) == 0) {
-                dayType = weekDayType;
-                break;
-            }
-        }
-        return dayType.isWeekendDay() ? HTML_OPEN_WEEKEND_TEG_TH :
-                HTML_OPEN_TEG_TH;
+        String result = "";
+
+        WeekDayType dayType = WeekDayType.getByTitle(title);
+
+        result += dayType.isWeekendDay()
+                ? HTML_OPEN_WEEKEND_TEG_TH
+                : HTML_OPEN_TEG_TH;
+
+        return result;
     }
 
     @Override
@@ -44,11 +44,7 @@ public class HTMLCalendarRender extends CalendarRender {
 
     @Override
     public String getOpenDayToken(WeekDay day) {
-        return day.isTheCurrentDay() ?
-                HTML_OPEN_CURRENT_DAY_TEG_TD :
-                day.isOtherMonth() ? HTML_OPEN_OTHER_MONTH_TEG_TD :
-                        day.getType().isWeekendDay() ? HTML_OPEN_WEEKEND_TD :
-                                HTML_OPEN_TEG_TD;
+        return calculateDayColor(day);
     }
 
     @Override
@@ -63,17 +59,37 @@ public class HTMLCalendarRender extends CalendarRender {
 
     @Override
     public String getCloseWeekToken() {
-        return HTML_CLOSE_TEG_TR + ConsoleCalendarRender.END_LINE;
+        return HTML_CLOSE_TEG_TR + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE;
     }
 
     @Override
     public String getOpenMonthToken() {
-        return HTML_STYLE_BOTSTRAP_CSS + ConsoleCalendarRender.END_LINE + HTML_OPEN_TEG_TABLE +
-                ConsoleCalendarRender.END_LINE;
+        return HTML_STYLE_BOTSTRAP_CSS + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE + HTML_OPEN_TEG_TABLE +
+                ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE;
     }
 
     @Override
     public String getCloseMonthToken() {
-        return HTML_CLOSE_TEG_TABLE + ConsoleCalendarRender.END_LINE + HTML_BOTSTRAP_JAVA_SCRIPT;
+        return HTML_CLOSE_TEG_TABLE + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE + HTML_BOTSTRAP_JAVA_SCRIPT;
+    }
+
+    @Override
+    public String getCurrentDayColor() {
+        return HTML_OPEN_CURRENT_DAY_TEG_TD;
+    }
+
+    @Override
+    public String getOtherMonthColor() {
+        return HTML_OPEN_OTHER_MONTH_TEG_TD;
+    }
+
+    @Override
+    public String getWeekDayColor() {
+        return HTML_OPEN_WEEKEND_TD;
+    }
+
+    @Override
+    public String getDefaultDayColor() {
+        return HTML_OPEN_TEG_TD;
     }
 }

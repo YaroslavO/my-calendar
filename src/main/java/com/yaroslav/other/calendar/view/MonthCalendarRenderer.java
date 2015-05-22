@@ -5,6 +5,6 @@ import com.yaroslav.other.calendar.MonthCalendar;
 /**
  * Created by employee on 5/22/15.
  */
-public interface Render {
+public interface MonthCalendarRenderer {
     public String render(MonthCalendar monthCalendar);
 }
