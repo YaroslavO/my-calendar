@@ -17,8 +17,6 @@ public enum WeekDayType {
     private int id;
     private String title;
 
-
-
     public boolean isWeekendDay() {
         return weekendDay;
     }
