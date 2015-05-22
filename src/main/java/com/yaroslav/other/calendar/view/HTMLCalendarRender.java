@@ -11,66 +11,52 @@ import java.util.Arrays;
  * Created by employee on 5/22/15.
  */
 public class HTMLCalendarRender extends CalendarRender{
+    public static final String HTML_OPEN_TEG_TD = "<td>";
+    public static final String HTML_OPEN_TEG_TR = "<tr>";
+    public static final String HTML_OPEN_TEG_TABLE = "<table>";
+    public static final String HTML_OPEN_TEG_TH = "<th>";
+    public static final String HTML_CLOSE_TEG_TD = "</td>";
+    public static final String HTML_CLOSE_TEG_TR = "</tr>";
+    public static final String HTML_CLOSE_TEG_TABLE = "</table>";
+    public static final String HTML_CLOSE_TEG_TH = "</th>";
 
-    public static final String HTML_TEG_TD = "td";
-    public static final String HTML_TEG_TR = "tr";
-    public static final String HTML_TEG_TABLE = "table";
-    public static final String HTML_TEG_TH = "th";
-
-    public void appendTag(StringBuilder sb, String tag, String contents) {
-        sb.append('<').append(tag).append('>');
-        sb.append(contents);
-        sb.append("</").append(tag).append('>');
-    }
-
-    public void appendDataCell(StringBuilder sb, String contents) {
-        appendTag(sb, HTML_TEG_TD, contents);
-    }
-
-    public void appendHeaderCell(StringBuilder sb, String contents) {
-        appendTag(sb, HTML_TEG_TH, contents);
-    }
-
-    public void appendRow(StringBuilder sb, String contents) {
-        appendTag(sb, HTML_TEG_TR, contents);
-    }
-
-    public String buildRow(Week week) {
-        StringBuilder sb = new StringBuilder();
-        String containerCell = "";
-
-        for (WeekDay day: week.getDays()) {
-            appendDataCell(sb, day.toString());
-            containerCell += sb.toString();
-            sb.setLength(0);
-        }
-        return containerCell;
+    @Override
+    public String getOpenTitleToken(String title) {
+        return null;
     }
 
     @Override
-    public String render(MonthCalendar monthCalendar) {
-        StringBuilder sb = new StringBuilder();
-        String containerTitle = "";
-        String containerRow = "";
+    public String getCloseTitleToken(String title) {
+        return null;
+    }
 
-        for (String title: Arrays.asList(WeekDayType.values().toString())) {
-            appendHeaderCell(sb, title);
-            containerTitle += sb.toString();
-            sb.setLength(0);
-        }
+    @Override
+    public String getOpenDayToken(WeekDay day) {
+        return null;
+    }
 
-        appendRow(sb, containerTitle);
+    @Override
+    public String getCloseDayToken(WeekDay day) {
+        return null;
+    }
 
-        containerTitle = sb.toString();
-        sb.setLength(0);
+    @Override
+    public String getOpenWeekToken() {
+        return null;
+    }
 
-        for (Week week: monthCalendar.getWeeks()){
-            appendRow(sb, buildRow(week));
-            containerRow += sb.toString();
-            sb.setLength(0);
-        }
+    @Override
+    public String getCloseWeekToken() {
+        return null;
+    }
 
-        appendTag(sb, HTML_TEG_TABLE, containerTitle + containerRow);
-        return sb.toString();
+    @Override
+    public String getOpenMonthToken() {
+        return null;
+    }
+
+    @Override
+    public String getCloseMonthToken() {
+        return null;
     }
 }

@@ -8,6 +8,11 @@ import java.util.Date;
  */
 public class WeekDay {
     private WeekDayType type;
+
+    public Calendar getDay() {
+        return day;
+    }
+
     private Calendar day;
     private Week week;
 
