@@ -5,6 +5,7 @@ import com.yaroslav.other.calendar.view.HTMLAbstractCalendarMonthCalendarRendere
 import com.yaroslav.other.calendar.view.MonthCalendarRenderer;
 
 import java.util.Calendar;
+import java.util.stream.Collectors;
 
 /**
  * Created by employee on 5/20/15.

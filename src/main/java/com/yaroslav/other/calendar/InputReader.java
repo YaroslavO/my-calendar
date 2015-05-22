@@ -54,6 +54,12 @@ public class InputReader {
     }
 
     public int getMonth(String value) {
+        switch (value) {
+            case "1" :
+            case "01":
+            case "jan":
+            case "january": return 0;
+        }
         if ((value.compareTo("1") == 0) || (value.compareTo("01") == 0) ||
                 (value.compareTo("jan") == 0) || (value.compareTo("january") == 0)) {
             return 0;
