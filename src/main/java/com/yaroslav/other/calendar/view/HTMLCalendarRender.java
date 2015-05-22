@@ -35,7 +35,6 @@ public class HTMLCalendarRender extends CalendarRender {
         }
         return dayType.isWeekendDay() ? HTML_OPEN_WEEKEND_TEG_TH :
                 HTML_OPEN_TEG_TH;
-
     }
 
     @Override
@@ -64,16 +63,17 @@ public class HTMLCalendarRender extends CalendarRender {
 
     @Override
     public String getCloseWeekToken() {
-        return HTML_CLOSE_TEG_TR + "\n";
+        return HTML_CLOSE_TEG_TR + ConsoleCalendarRender.END_LINE;
     }
 
     @Override
     public String getOpenMonthToken() {
-        return HTML_STYLE_BOTSTRAP_CSS + "\n" + HTML_OPEN_TEG_TABLE;
+        return HTML_STYLE_BOTSTRAP_CSS + ConsoleCalendarRender.END_LINE + HTML_OPEN_TEG_TABLE +
+                ConsoleCalendarRender.END_LINE;
     }
 
     @Override
     public String getCloseMonthToken() {
-        return HTML_CLOSE_TEG_TABLE + "\n" + HTML_BOTSTRAP_JAVA_SCRIPT;
+        return HTML_CLOSE_TEG_TABLE + ConsoleCalendarRender.END_LINE + HTML_BOTSTRAP_JAVA_SCRIPT;
     }
 }
