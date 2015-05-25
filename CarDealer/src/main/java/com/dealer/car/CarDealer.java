@@ -1,8 +1,6 @@
 package com.dealer.car;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Yaroslav on 23.05.2015.
@@ -56,5 +54,27 @@ public class CarDealer {
 
     public Integer getRandomIndexFromList(List list) {
         return new Random().nextInt(list.size());
+    }
+
+    public HashMap<Manager, List<Deal>> getDealsManager() {
+        HashMap<Manager, List<Deal>> dealsManager = new HashMap<>();
+
+        for (Manager manager: managers) {
+            dealsManager.put(manager, getListDealOfManager(manager));
+        }
+
+        return dealsManager;
+    }
+
+    private List<Deal> getListDealOfManager(Manager manager) {
+        List<Deal> dealList = new ArrayList<>();
+
+        for (Deal deal: deals) {
+            if (deal.getManager().compareTo(manager) == 0) {
+                dealList.add(deal);
+            }
+        }
+
+        return dealList;
     }
 }
