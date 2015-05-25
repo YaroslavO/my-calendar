@@ -8,18 +8,27 @@ import java.util.Map;
  * Created by employee on 5/25/15.
  */
 public class ConsoleCarDealerRenderer implements Renderer {
-    public Map<Manager, List<Deal>> managerDealsMap;
+    private CarDealer carDealer;
 
-    public ConsoleCarDealerRenderer() {
-        managerDealsMap = new HashMap<>();
+    ConsoleCarDealerRenderer (CarDealer carDealer) {
+        this.carDealer = carDealer;
     }
 
     @Override
-    public String render(CarDealer carDealer) {
+    public String render() {
         String result = "";
 
-        managerDealsMap = carDealer.getDealsManager();
+        Calculator calculator = new Calculator(carDealer);
+        for (Manager manager: carDealer.getManagers()) {
+            ManagerBrand managerBrand = calculator.getBestBrandForManager(manager);
+            result += "Best brand = \"";
+            result += managerBrand.getBrand().getName() + "\" ";
+            result += "for manager first name = " + "\"" + manager.getFirstName();
+            result += " last name = " + "\"" + manager.getLastName();
+            result += " count sales " + managerBrand.getCount();
+            result += " sum price " + managerBrand.getPriceOfDeals() + "\n";
+        }
 
-        return null;
+        return result;
     }
 }

@@ -14,6 +14,10 @@ public class Deal {
         this.client = client;
     }
 
+    public Sale getSale() {
+        return sale;
+    }
+
     public Manager getManager() {
         return manager;
     }

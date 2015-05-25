@@ -29,7 +29,7 @@ public enum Brand {
         return price;
     }
 
-    public static Brand getBrendByName(String name) {
+    public static Brand getBrandByName(String name) {
         for (Brand brand : Brand.values()) {
             if (brand.getName().compareTo(name) != 0) {
                 continue;

@@ -19,15 +19,15 @@ public class CarDealer {
     }
 
     public void init() {
-        Car car = new Car(Brand.getBrendByName("BMW"), "X6", 20000.0);
+        Car car = new Car(Brand.getBrandByName("BMW"), "X6", 20000.0);
         cars.add(car);
-        car = new Car(Brand.getBrendByName("Tesla"), "S", 40000.0);
+        car = new Car(Brand.getBrandByName("Tesla"), "S", 40000.0);
         cars.add(car);
-        car = new Car(Brand.getBrendByName("Audi"), "A6", 25000.0);
+        car = new Car(Brand.getBrandByName("Audi"), "A6", 25000.0);
         cars.add(car);
-        car = new Car(Brand.getBrendByName("Audi"), "A8", 30000.0);
+        car = new Car(Brand.getBrandByName("Audi"), "A8", 30000.0);
         cars.add(car);
-        car = new Car(Brand.getBrendByName("Renault"), "Logan", 40000.0);
+        car = new Car(Brand.getBrandByName("Renault"), "Logan", 40000.0);
         cars.add(car);
 
         Client client = new Client("Petro", "Smagluk", 40000.0);
@@ -56,17 +56,7 @@ public class CarDealer {
         return new Random().nextInt(list.size());
     }
 
-    public HashMap<Manager, List<Deal>> getDealsManager() {
-        HashMap<Manager, List<Deal>> dealsManager = new HashMap<>();
-
-        for (Manager manager: managers) {
-            dealsManager.put(manager, getListDealOfManager(manager));
-        }
-
-        return dealsManager;
-    }
-
-    private List<Deal> getListDealOfManager(Manager manager) {
+    public List<Deal> getListDealOfManager(Manager manager) {
         List<Deal> dealList = new ArrayList<>();
 
         for (Deal deal: deals) {
@@ -78,4 +68,7 @@ public class CarDealer {
         return dealList;
     }
 
+    public List<Manager> getManagers() {
+        return managers;
+    }
 }

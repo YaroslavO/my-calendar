@@ -6,6 +6,13 @@ package com.dealer.car;
 public class ManagerBrand implements Comparable{
     private Manager manager;
     private Brand brand;
+    private int count;
+    private double priceOfDeals;
+
+    public ManagerBrand (Manager manager, Brand brand) {
+        this.manager = manager;
+        this.brand = brand;
+    }
 
     @Override
     public int compareTo(Object o) {
@@ -24,5 +31,21 @@ public class ManagerBrand implements Comparable{
 
     public Brand getBrand() {
         return brand;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public double getPriceOfDeals() {
+        return priceOfDeals;
+    }
+
+    public void setPriceOfDeals(double priceOfDeal) {
+        this.priceOfDeals = priceOfDeal;
     }
 }

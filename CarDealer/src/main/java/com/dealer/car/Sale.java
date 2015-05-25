@@ -23,4 +23,12 @@ public class Sale {
 
         return result;
     }
+
+    public Car getCarForSale() {
+        return carForSale;
+    }
+
+    public Double getCostOfSale() {
+        return costOfSale;
+    }
 }
