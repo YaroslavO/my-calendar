@@ -7,8 +7,7 @@ public class Main {
     public static void main(String []args) {
         CarDealer carDealer = new CarDealer();
         carDealer.init();
-        ConsoleCarDealerRenderer consoleCarDealerRenderer = new ConsoleCarDealerRenderer();
-
-        System.out.println();
+        ConsoleCarDealerRenderer consoleCarDealerRenderer = new ConsoleCarDealerRenderer(carDealer);
+        System.out.println(consoleCarDealerRenderer.render());
     }
 }
