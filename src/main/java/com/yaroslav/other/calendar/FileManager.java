@@ -9,6 +9,10 @@ import java.nio.file.Files;
 public class FileManager {
 
     public void saveToFile(String fileName, String content) {
+        String[] partPath = fileName.split("\\\\");
+        createDirIfNotExist(partPath[0]);
+        createDirIfNotExist(partPath[0] + "\\" + partPath[1]);
+
         File file = new File(fileName);
         if (file.exists()) {
             file.delete();
@@ -17,6 +21,7 @@ public class FileManager {
             try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(fileName), "utf-8"))) {
                 writer.write(content);
+                writer.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

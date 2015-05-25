@@ -23,7 +23,7 @@ public class CustomerCalendar {
 
         for (String year: task.split("\n")) {
             String [] parseYear = year.split(" ");
-            yearCalendar = new YearCalendar(parseYear[1]);
+            yearCalendar = new YearCalendar(parseYear[0]);
             if (parseYear.length == 1) {
                 months = new ArrayList<>();
                 for (int month = 0; month < 12; month++) {
@@ -33,6 +33,7 @@ public class CustomerCalendar {
                     calendar.set(Calendar.DAY_OF_MONTH, 1);
                     monthCalendar.init(calendar);
                     months.add(monthCalendar);
+                    monthCalendar = new MonthCalendar();
                 }
                 yearCalendar.setMonths(months);
             } else {
@@ -44,6 +45,7 @@ public class CustomerCalendar {
                     calendar.set(Calendar.DAY_OF_MONTH, 1);
                     monthCalendar.init(calendar);
                     months.add(monthCalendar);
+                    monthCalendar = new MonthCalendar();
                 }
                 yearCalendar.setMonths(months);
             }

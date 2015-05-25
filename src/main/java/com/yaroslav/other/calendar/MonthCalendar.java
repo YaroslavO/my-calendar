@@ -53,4 +53,8 @@ public class MonthCalendar {
 
         return countWeek;
     }
+
+    public Calendar getDate() {
+        return date;
+    }
 }

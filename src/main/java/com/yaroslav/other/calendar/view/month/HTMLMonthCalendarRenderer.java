@@ -1,4 +1,4 @@
-package com.yaroslav.other.calendar.view;
+package com.yaroslav.other.calendar.view.month;
 
 import com.yaroslav.other.calendar.WeekDay;
 import com.yaroslav.other.calendar.WeekDayType;
@@ -6,7 +6,7 @@ import com.yaroslav.other.calendar.WeekDayType;
 /**
  * Created by employee on 5/22/15.
  */
-public class HTMLAbstractCalendarMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
+public class HTMLMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
     public static final String HTML_OPEN_TEG_TD = "<td>";
     public static final String HTML_OPEN_CURRENT_DAY_TEG_TD = "<td style=\"color: red\">";
     public static final String HTML_OPEN_OTHER_MONTH_TEG_TD = "<td style=\"color: grey\">";
