@@ -9,9 +9,9 @@ public class Deal {
     private Client client;
 
     public Deal(Car car, Manager manager, Client client) {
-        sale = new Sale(car, this);
         this.manager = manager;
         this.client = client;
+        sale = new Sale(car, this);
     }
 
     public Sale getSale() {

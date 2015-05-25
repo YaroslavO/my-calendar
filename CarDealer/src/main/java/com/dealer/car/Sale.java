@@ -5,7 +5,6 @@ package com.dealer.car;
  */
 public class Sale {
     private Car carForSale;
-    private Boolean sold;
     private Deal deal;
     private Double costOfSale;
 
