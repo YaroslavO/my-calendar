@@ -43,7 +43,7 @@ public class CarDealer {
         managers.add(manager);
 
         Deal deal;
-        for (int i=1; i < cars.size(); i++) {
+        for (int i=1; i <= 20; i++) {
             deal = new Deal(cars.get(getRandomIndexFromList(cars)),
                     managers.get(getRandomIndexFromList(managers)),
                     clients.get((getRandomIndexFromList(clients))));

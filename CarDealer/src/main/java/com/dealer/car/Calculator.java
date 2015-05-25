@@ -15,18 +15,17 @@ public class Calculator {
     public ManagerBrand getBestBrandForManager(Manager manager) {
         List<Deal> managerDealsList = carDealer.getListDealOfManager(manager);
 
-        Map<ManagerBrand, Integer> managerBrandMap = getManagerBrandCountMap(manager, managerDealsList);
+        Set<ManagerBrand> managerBrandSet = getManagerBrandCountMap(manager, managerDealsList);
 
-        Set<ManagerBrand> managerBrandKeySet = managerBrandMap.keySet();
         ManagerBrand bestManagerBrandOfCount = null;
         ManagerBrand bestManagerBrandOfPrice = null;
         int count;
         int maxCount = 0;
-        double price = 0;
+        double price;
         double maxPrice = 0;
 
-        for (ManagerBrand mb: managerBrandKeySet) {
-            count = managerBrandMap.get(mb);
+        for (ManagerBrand mb: managerBrandSet) {
+            count = mb.getCount();
             price = mb.getPriceOfDeals();
 
             if (count > maxCount) {
@@ -40,39 +39,38 @@ public class Calculator {
             }
         }
 
-        try {
-            bestManagerBrandOfCount.setCount(maxCount);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
         return  (bestManagerBrandOfCount.getPriceOfDeals() >= bestManagerBrandOfPrice.getPriceOfDeals())
                 ? bestManagerBrandOfCount
                 : bestManagerBrandOfPrice;
     }
 
-    private Map<ManagerBrand, Integer> getManagerBrandCountMap(Manager manager, List<Deal> deals) {
-        Map<ManagerBrand, Integer> managerBrandMap = new HashMap<>();
+    private Set<ManagerBrand> getManagerBrandCountMap(Manager manager, List<Deal> deals) {
+        TreeSet<ManagerBrand> managerBrandSet = new TreeSet<>();
         ManagerBrand managerBrand;
-        int count;
         double price;
         double profit;
 
         for (Deal deal: deals) {
             managerBrand = new ManagerBrand(manager, deal.getSale().getCarForSale().getBrand());
             price = deal.getSale().getCostOfSale();
-            if (managerBrandMap.containsKey(managerBrand)) {
-                count = managerBrandMap.get(managerBrand);
+            if (managerBrandSet.contains(managerBrand)) {
+                for (ManagerBrand mb: managerBrandSet) {
+                    if (mb.compareTo(managerBrand) == 0) {
+                        managerBrand = mb;
+                        break;
+                    }
+                }
+                managerBrand.setCount(managerBrand.getCount() + 1);
                 profit = managerBrand.getPriceOfDeals();
                 profit += price;
                 managerBrand.setPriceOfDeals(profit);
-                managerBrandMap.put(managerBrand, count);
+                managerBrandSet.add(managerBrand);
             } else {
                 managerBrand.setPriceOfDeals(price);
-                managerBrandMap.put(managerBrand, 1);
+                managerBrandSet.add(managerBrand);
             }
         }
 
-        return managerBrandMap;
+        return managerBrandSet;
     }
 }

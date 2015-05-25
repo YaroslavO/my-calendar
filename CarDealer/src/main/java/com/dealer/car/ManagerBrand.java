@@ -6,7 +6,7 @@ package com.dealer.car;
 public class ManagerBrand implements Comparable{
     private Manager manager;
     private Brand brand;
-    private int count;
+    private int count = 1;
     private double priceOfDeals;
 
     public ManagerBrand (Manager manager, Brand brand) {
