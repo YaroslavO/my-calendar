@@ -23,12 +23,7 @@ public class FileManager {
         }
     }
 
-    public String readFile(String fileName) {
-
-        return " ";
-    }
-
-    private void createUploadDirIfNotExist(String pathToDir) {
+    private void createDirIfNotExist(String pathToDir) {
         File dir = new File(pathToDir);
         if (!dir.exists()) {
             try {
