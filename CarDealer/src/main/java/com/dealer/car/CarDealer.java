@@ -19,15 +19,15 @@ public class CarDealer {
     }
 
     public void init() {
-        Car car = new Car(Brend.getBrendByName("BMW"), "X6", 20000.0);
+        Car car = new Car(Brand.getBrendByName("BMW"), "X6", 20000.0);
         cars.add(car);
-        car = new Car(Brend.getBrendByName("Tesla"), "S", 40000.0);
+        car = new Car(Brand.getBrendByName("Tesla"), "S", 40000.0);
         cars.add(car);
-        car = new Car(Brend.getBrendByName("Audi"), "A6", 25000.0);
+        car = new Car(Brand.getBrendByName("Audi"), "A6", 25000.0);
         cars.add(car);
-        car = new Car(Brend.getBrendByName("Audi"), "A8", 30000.0);
+        car = new Car(Brand.getBrendByName("Audi"), "A8", 30000.0);
         cars.add(car);
-        car = new Car(Brend.getBrendByName("Renault"), "Logan", 40000.0);
+        car = new Car(Brand.getBrendByName("Renault"), "Logan", 40000.0);
         cars.add(car);
 
         Client client = new Client("Petro", "Smagluk", 40000.0);
@@ -77,4 +77,5 @@ public class CarDealer {
 
         return dealList;
     }
+
 }

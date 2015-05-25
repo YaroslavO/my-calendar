@@ -18,7 +18,7 @@ public class Sale {
     private Double calculateCostOfSale() {
         Double result = 0.0;
         result += carForSale.getPrice();
-        result += carForSale.getBrend().getPrice();
+        result += carForSale.getBrand().getPrice();
         result += deal.getManager().getSalaryForOneSale();
 
         return result;

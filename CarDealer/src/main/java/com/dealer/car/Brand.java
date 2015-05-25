@@ -3,7 +3,7 @@ package com.dealer.car;
 /**
  * Created by Yaroslav on 23.05.2015.
  */
-public enum Brend {
+public enum Brand {
     BMW("BMW", 100.0),
     TESLA("Tesla", 100.0),
     AUDI("Audi", 70.0),
@@ -13,10 +13,10 @@ public enum Brend {
     private String name;
     private Double price;
 
-    Brend() {
+    Brand() {
     }
 
-    Brend(String name, Double price) {
+    Brand(String name, Double price) {
         this.name = name;
         this.price = price;
     }
@@ -29,12 +29,12 @@ public enum Brend {
         return price;
     }
 
-    public static Brend getBrendByName(String name) {
-        for (Brend brend: Brend.values()) {
-            if (brend.getName().compareTo(name) != 0) {
+    public static Brand getBrendByName(String name) {
+        for (Brand brand : Brand.values()) {
+            if (brand.getName().compareTo(name) != 0) {
                 continue;
             }
-            return brend;
+            return brand;
         }
 
         return null;
