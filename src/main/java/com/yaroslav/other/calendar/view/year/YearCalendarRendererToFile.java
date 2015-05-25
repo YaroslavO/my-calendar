@@ -26,12 +26,7 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
         FileManager fileManager = new FileManager();
         MonthCalendarRenderer monthCalendarRenderer = new HTMLMonthCalendarRenderer();
         List<YearCalendar> listYear = customerCalendar.getListYear();
-
-        FileSystem fs = FileSystems.getDefault();
-
-        Path path1 = fs.getPath("my-app.iml");
-        String absolutePath = path1.toAbsolutePath().toString();
-        String filePath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+        String filePath = getFilePath();
         String link = "";
         String linkNext = "";
         String linkPrevious = "";
@@ -44,9 +39,11 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
                 link += MAIN_DIRECTORY + File.separator +
                         yearCalendar.getName() + File.separator +
                         monthCalendar.getDate().get(Calendar.MONTH) + EXTENSION;
-                result += getPreviousMonthToken(filePath + linkPrevious);
+                result += getHeaderMonthToken(yearCalendar.getName(),
+                        getMonthName(monthCalendar.getDate().get(Calendar.MONTH)));
+                result += getPreviousMonthToken(filePath + File.separator + linkPrevious);
                 result += monthCalendarRenderer.render(monthCalendar);
-                result += getNextMonthToken(linkNext);
+                result += getNextMonthToken(filePath + File.separator + linkNext);
                 fileManager.saveToFile(link, result);
                 linkPrevious = link;
             }
@@ -54,6 +51,32 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
         }
     }
 
+    private String getMonthName(int numberMonth) {
+        switch (numberMonth) {
+            case 0: return "january";
+            case 1: return "february";
+            case 2: return "march";
+            case 3: return "april";
+            case 4: return "may";
+            case 5: return "june";
+            case 6: return "july";
+            case 7: return "august";
+            case 8: return "september";
+            case 9: return "october";
+            case 10: return "november";
+            case 11: return "december";
+        }
+        return "january";
+    }
+
+    private String getFilePath() {
+        FileSystem fs = FileSystems.getDefault();
+        Path path1 = fs.getPath("my-app.iml");
+        String absolutePath = path1.toAbsolutePath().toString();
+        return absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
+    }
+
+    public abstract String getHeaderMonthToken(String year, String month);
     public abstract String getPreviousMonthToken(String link);
     public abstract String getNextMonthToken(String link);
 
