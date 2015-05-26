@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -27,18 +28,26 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
         MonthCalendarRenderer monthCalendarRenderer = new HTMLMonthCalendarRenderer();
         List<YearCalendar> listYear = customerCalendar.getListYear();
         String filePath = getFilePath();
+        List<String> links = getListLink(listYear);
         String link = "";
         String linkNext = "";
         String linkPrevious = "";
         String result;
 
+        int numberLink = 0;
+
         for (YearCalendar yearCalendar: listYear) {
             for (MonthCalendar monthCalendar: yearCalendar.getMonths()) {
-                link = "";
+                if (numberLink == 0) {
+                    link = links.get(numberLink);
+                    linkNext = links.get(numberLink + 1);
+                    linkPrevious = links.get(links.size() - 1);
+                }
+                if (numberLink < links.size() - 1) {
+                    link = links.get(numberLink);
+                    linkNext = links.get(numberLink + 1);
+                }
                 result = "";
-                link += MAIN_DIRECTORY + File.separator +
-                        yearCalendar.getName() + File.separator +
-                        monthCalendar.getDate().get(Calendar.MONTH) + EXTENSION;
                 result += getHeaderMonthToken(yearCalendar.getName(),
                         getMonthName(monthCalendar.getDate().get(Calendar.MONTH)));
                 result += getPreviousMonthToken(filePath + File.separator + linkPrevious);
@@ -46,9 +55,22 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
                 result += getNextMonthToken(filePath + File.separator + linkNext);
                 fileManager.saveToFile(link, result);
                 linkPrevious = link;
+                numberLink++;
             }
 
         }
+    }
+
+    private List<String> getListLink(List<YearCalendar> listYear) {
+        List<String> linkList = new ArrayList<>();
+        for (YearCalendar yearCalendar: listYear) {
+            for (MonthCalendar monthCalendar: yearCalendar.getMonths()) {
+                linkList.add(MAIN_DIRECTORY + File.separator +
+                        yearCalendar.getName() + File.separator +
+                        monthCalendar.getDate().get(Calendar.MONTH) + EXTENSION);
+            }
+        }
+        return linkList;
     }
 
     private String getMonthName(int numberMonth) {
