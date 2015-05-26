@@ -44,7 +44,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
                 linkPrevious = links.get(links.size() - 1);
             }
 
-            if (numberLink < links.size() - 1) {
+            if (isLinkInMidYear(links, numberLink)) {
                 link = links.get(numberLink);
                 linkNext = links.get(numberLink + 1);
             }
@@ -58,7 +58,12 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
             linkPrevious = link;
             numberLink++;
         }
+
         return numberLink;
+    }
+
+    private boolean isLinkInMidYear(List<String> links, int numberLink) {
+        return numberLink < links.size() - 1;
     }
 
     private void saveRenderToFile(String link, String linkNext, String linkPrevious, MonthCalendar monthCalendar) {
