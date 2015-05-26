@@ -3,7 +3,7 @@ package com.yaroslav.other.calendar.view.year;
 /**
  * Created by Yaroslav on 25.05.2015.
  */
-public class HTMLYearCalendarRendererToFile extends YearCalendarRendererToFile{
+public class HTMLAbstractYearCalendarRendererToFile extends AbstractYearCalendarRendererToFile {
     public static final String START_BUTTON = "<a href=\"";
     public static final String END_NEXT_BUTTON = "\" class=\"btn btn-block btn-success\">Next month</a>";
     public static final String END_PREVIOUS_BUTTON = "\" class=\"btn btn-block btn-success\">Previous month</a>";
@@ -15,7 +15,7 @@ public class HTMLYearCalendarRendererToFile extends YearCalendarRendererToFile{
 
 
     @Override
-    public String getHeaderMonthToken(String year, String month) {
+    public String getHeaderMonthToken(Integer year, String month) {
         String result = "";
         result += BEGIN_DIV_HEADER;
         result += BEGIN_H;

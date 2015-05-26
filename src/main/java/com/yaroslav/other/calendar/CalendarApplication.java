@@ -1,15 +1,11 @@
 package com.yaroslav.other.calendar;
 
 import com.yaroslav.other.calendar.file.SourceLoader;
-import com.yaroslav.other.calendar.view.month.ConsoleAbstractCalendarMonthCalendarRenderer;
-import com.yaroslav.other.calendar.view.month.HTMLMonthCalendarRenderer;
-import com.yaroslav.other.calendar.view.month.MonthCalendarRenderer;
 import com.yaroslav.other.calendar.view.year.CalendarRenderer;
-import com.yaroslav.other.calendar.view.year.HTMLYearCalendarRendererToFile;
+import com.yaroslav.other.calendar.view.year.HTMLAbstractYearCalendarRendererToFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * Created by employee on 5/20/15.
@@ -33,7 +29,7 @@ public class CalendarApplication {
         CustomerCalendar calendar = new CustomerCalendar(source);
         calendar.init();
 
-        CalendarRenderer calendarRenderer = new HTMLYearCalendarRendererToFile();
+        CalendarRenderer calendarRenderer = new HTMLAbstractYearCalendarRendererToFile();
         calendarRenderer.renderer(calendar);
     }
 }

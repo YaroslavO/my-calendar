@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Yaroslav on 25.05.2015.
  */
-public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
+public abstract class AbstractYearCalendarRendererToFile implements CalendarRenderer  {
     public final static String MAIN_DIRECTORY = "calendar";
     public static final String EXTENSION = ".html";
 
@@ -113,7 +113,7 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
         return absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
     }
 
-    public abstract String getHeaderMonthToken(String year, String month);
+    public abstract String getHeaderMonthToken(Integer year, String month);
     public abstract String getPreviousMonthToken(String link);
     public abstract String getNextMonthToken(String link);
 
