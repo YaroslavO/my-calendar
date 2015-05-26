@@ -6,7 +6,7 @@ import com.yaroslav.other.calendar.WeekDayType;
 /**
  * Created by employee on 5/22/15.
  */
-public class HTMLMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
+public class HTMLAbstractMonthCalendarRenderer extends AbstractCalendarMonthCalendarRenderer {
     public static final String HTML_OPEN_TEG_TD = "<td>";
     public static final String HTML_OPEN_CURRENT_DAY_TEG_TD = "<td style=\"color: red\">";
     public static final String HTML_OPEN_OTHER_MONTH_TEG_TD = "<td style=\"color: grey\">";
@@ -59,18 +59,18 @@ public class HTMLMonthCalendarRenderer extends AbstractCalendarMonthCalendarRend
 
     @Override
     public String getCloseWeekToken() {
-        return HTML_CLOSE_TEG_TR + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE;
+        return HTML_CLOSE_TEG_TR + ConsoleAbstractMonthCalendarRenderer.END_LINE;
     }
 
     @Override
     public String getOpenMonthToken() {
-        return HTML_STYLE_BOTSTRAP_CSS + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE + HTML_OPEN_TEG_TABLE +
-                ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE;
+        return HTML_STYLE_BOTSTRAP_CSS + ConsoleAbstractMonthCalendarRenderer.END_LINE + HTML_OPEN_TEG_TABLE +
+                ConsoleAbstractMonthCalendarRenderer.END_LINE;
     }
 
     @Override
     public String getCloseMonthToken() {
-        return HTML_CLOSE_TEG_TABLE + ConsoleAbstractCalendarMonthCalendarRenderer.END_LINE + HTML_BOTSTRAP_JAVA_SCRIPT;
+        return HTML_CLOSE_TEG_TABLE + ConsoleAbstractMonthCalendarRenderer.END_LINE + HTML_BOTSTRAP_JAVA_SCRIPT;
     }
 
     @Override

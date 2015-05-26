@@ -17,7 +17,7 @@ public class CalendarApplication {
     public static void main(String[] args) {
 
         FileManager fileManager = new FileManager();
-        List<String> listYearAndMonth = new ArrayList<String>();
+        List<String> listYearAndMonth = new ArrayList<>();
         listYearAndMonth.add("2015 jun jul");
 
         try {
@@ -33,6 +33,6 @@ public class CalendarApplication {
         calendar.init(listYearAndMonth);
 
         CalendarRenderer calendarRenderer = new HTMLAbstractYearCalendarRendererToFile();
-        calendarRenderer.renderer(calendar);
+        calendarRenderer.render(calendar);
     }
 }

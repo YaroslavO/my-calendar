@@ -4,7 +4,7 @@ import com.yaroslav.other.calendar.CustomerCalendar;
 import com.yaroslav.other.calendar.FileManager;
 import com.yaroslav.other.calendar.MonthCalendar;
 import com.yaroslav.other.calendar.YearCalendar;
-import com.yaroslav.other.calendar.view.month.HTMLMonthCalendarRenderer;
+import com.yaroslav.other.calendar.view.month.HTMLAbstractMonthCalendarRenderer;
 import com.yaroslav.other.calendar.view.month.MonthCalendarRenderer;
 
 import java.io.File;
@@ -23,12 +23,13 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
     public static final String EXTENSION = ".html";
 
     @Override
-    public void renderer(CustomerCalendar customerCalendar) {
+    public void render(CustomerCalendar customerCalendar) {
         FileManager fileManager = new FileManager();
         fileManager.deleteDirectories(MAIN_DIRECTORY);
-        MonthCalendarRenderer monthCalendarRenderer = new HTMLMonthCalendarRenderer();
+        MonthCalendarRenderer monthCalendarRenderer = new HTMLAbstractMonthCalendarRenderer();
         List<YearCalendar> listYear = customerCalendar.getListYear();
-        String filePath = getFilePath();
+        String filePath = fileManager.getPathToFile("my-app.iml").toString();
+        filePath = filePath.substring(0, filePath.lastIndexOf(File.separator));
         List<String> links = getListLink(listYear);
         String link = "";
         String linkNext = "";
@@ -105,13 +106,6 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
             case 11: return "december";
         }
         return "january";
-    }
-
-    private String getFilePath() {
-        FileSystem fs = FileSystems.getDefault();
-        Path path1 = fs.getPath("my-app.iml");
-        String absolutePath = path1.toAbsolutePath().toString();
-        return absolutePath.substring(0, absolutePath.lastIndexOf(File.separator));
     }
 
     public abstract String getHeaderMonthToken(Integer year, String month);
