@@ -45,7 +45,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
 
         String fileContent = composeMonthContent(navigator, monthCalendar);
 
-        fileManager.saveToFile(navigator.getCurrent(), fileContent);
+        fileManager.saveToFile(navigator.getCurrentFilePath(), fileContent);
     }
 
     private String composeMonthContent(NavigatorLink navigator, MonthCalendar monthCalendar) {
