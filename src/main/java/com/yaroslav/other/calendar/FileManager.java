@@ -14,9 +14,11 @@ public class FileManager {
         createDirIfNotExist(partPath[0] + File.separator + partPath[1]);
 
         File file = new File(fileName);
+
         if (file.exists()) {
             file.delete();
         }
+
         try {
             try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(fileName), "utf-8"))) {

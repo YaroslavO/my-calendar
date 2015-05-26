@@ -38,7 +38,7 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
 
         for (YearCalendar yearCalendar: listYear) {
             for (MonthCalendar monthCalendar: yearCalendar.getMonths()) {
-                if (numberLink == 0) {
+                if (isFirstMonth(numberLink)) {
                     link = links.get(numberLink);
                     linkNext = links.get(numberLink + 1);
                     linkPrevious = links.get(links.size() - 1);
@@ -49,7 +49,7 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
                     linkNext = links.get(numberLink + 1);
                 }
 
-                if (numberLink == links.size() - 1) {
+                if (isLastMonth(links, numberLink)) {
                     link = links.get(numberLink);
                     linkNext = links.get(0);
                 }
@@ -66,6 +66,14 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
             }
 
         }
+    }
+
+    private boolean isLastMonth(List<String> links, int numberLink) {
+        return numberLink == links.size() - 1;
+    }
+
+    private boolean isFirstMonth(int numberLink) {
+        return numberLink == 0;
     }
 
     private List<String> getListLink(List<YearCalendar> listYear) {
