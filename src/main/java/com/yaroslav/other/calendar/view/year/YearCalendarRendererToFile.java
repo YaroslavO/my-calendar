@@ -53,6 +53,7 @@ public abstract class YearCalendarRendererToFile implements CalendarRenderer  {
                     link = links.get(numberLink);
                     linkNext = links.get(0);
                 }
+
                 result = "";
                 result += getHeaderMonthToken(yearCalendar.getName(),
                         getMonthName(monthCalendar.getDate().get(Calendar.MONTH)));
