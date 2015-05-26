@@ -72,8 +72,6 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
         return linkList;
     }
 
-
-
     public abstract String getHeaderMonthToken(Calendar date);
     public abstract String getPreviousMonthToken(String link);
     public abstract String getNextMonthToken(String link);
