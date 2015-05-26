@@ -34,59 +34,36 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
     }
 
     private int saveMonthToFile(List<String> links, int numberLink, YearCalendar yearCalendar) {
-        String link = "";
-        String linkNext = "";
-        String linkPrevious = "";
-
         for (MonthCalendar monthCalendar: yearCalendar.getMonths()) {
-            if (isFirstMonth(numberLink)) {
-                link = links.get(numberLink);
-                linkNext = links.get(numberLink + 1);
-                linkPrevious = links.get(links.size() - 1);
-            }
-
-            if (isLinkInMidYear(links, numberLink)) {
-                linkPrevious = links.get(numberLink - 1);
-                link = links.get(numberLink);
-                linkNext = links.get(numberLink + 1);
-            }
-
-            if (isLastMonth(links, numberLink)) {
-                linkPrevious = links.get(numberLink - 1);
-                link = links.get(numberLink);
-                linkNext = links.get(0);
-            }
-
-            saveRenderToFile(link, linkNext, linkPrevious, monthCalendar);
-            numberLink++;
+            numberLink = createPreviousCurrentAndNextLinks(links, numberLink, monthCalendar);
         }
 
         return numberLink;
     }
 
-    private boolean isLinkInMidYear(List<String> links, int numberLink) {
-        return (numberLink < links.size() - 1) && (numberLink != 0);
+    private int createPreviousCurrentAndNextLinks(List<String> links, int numberLink, MonthCalendar monthCalendar) {
+        NavigatorLink navigator = new NavigatorLink(links, numberLink);
+
+        saveRenderToFile(navigator, monthCalendar);
+        numberLink++;
+        return numberLink;
     }
 
-    private boolean isLastMonth(List<String> links, int numberLink) {
-        return numberLink == links.size() - 1;
-    }
 
-    private boolean isFirstMonth(int numberLink) {
-        return numberLink == 0;
-    }
 
-    private void saveRenderToFile(String link, String linkNext, String linkPrevious, MonthCalendar monthCalendar) {
+    private void saveRenderToFile(NavigatorLink navigator, MonthCalendar monthCalendar) {
         FileManager fileManager = new FileManager();
         String filePath = getPathToCreateDirectory(fileManager);
         MonthCalendarRenderer monthCalendarRenderer = new HTMLAbstractMonthCalendarRenderer();
-        String result = "";
-        result += getHeaderMonthToken(monthCalendar.getDate().get(Calendar.YEAR),
+
+        String fileContent = "";
+        fileContent += getHeaderMonthToken(monthCalendar.getDate().get(Calendar.YEAR),
                 getMonthName(monthCalendar.getDate().get(Calendar.MONTH)));
-        result += getPreviousMonthToken(filePath + File.separator + linkPrevious);
-        result += monthCalendarRenderer.render(monthCalendar);
-        result += getNextMonthToken(filePath + File.separator + linkNext);
-        fileManager.saveToFile(link, result);
+        fileContent += getPreviousMonthToken(filePath + File.separator + navigator.getPrevious());
+        fileContent += monthCalendarRenderer.render(monthCalendar);
+        fileContent += getNextMonthToken(filePath + File.separator + navigator.getNext());
+
+        fileManager.saveToFile(navigator.getCurrent(), fileContent);
     }
 
     private String getPathToCreateDirectory(FileManager fileManager) {
