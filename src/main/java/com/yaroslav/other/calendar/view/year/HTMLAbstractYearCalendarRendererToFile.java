@@ -13,7 +13,6 @@ public class HTMLAbstractYearCalendarRendererToFile extends AbstractYearCalendar
     public static final String END_H = "</h3>";
     public static final String END_DIV_HEADER = "</div>";
 
-
     @Override
     public String getHeaderMonthToken(Integer year, String month) {
         String result = "";

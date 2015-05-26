@@ -25,6 +25,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
     @Override
     public void renderer(CustomerCalendar customerCalendar) {
         FileManager fileManager = new FileManager();
+        fileManager.deleteDirectories(MAIN_DIRECTORY);
         MonthCalendarRenderer monthCalendarRenderer = new HTMLMonthCalendarRenderer();
         List<YearCalendar> listYear = customerCalendar.getListYear();
         String filePath = getFilePath();

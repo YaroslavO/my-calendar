@@ -1,7 +1,11 @@
 package com.yaroslav.other.calendar;
 
 import java.io.*;
-import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Yaroslav on 21.05.2015.
@@ -38,6 +42,59 @@ public class FileManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public boolean isAllowed(String pathToSource) {
+        File readFile = new File(pathToSource);
+        return readFile.isFile() && readFile.canRead() && readFile.exists();
+    }
+
+    public List<String> load(String pathToSource) throws IOException {
+        BufferedReader reader = Files.newBufferedReader(Paths.get(pathToSource),
+                StandardCharsets.UTF_8);
+        return reader
+                .lines()
+                .map(line -> {
+                    return line;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public List<String> loadSource(String pathToSource) throws IOException {
+        if (isAllowed(pathToSource)) {
+            return load(pathToSource);
+        }
+
+        throw new IOException("Bad path to file " + pathToSource);
+    }
+
+    public Path getPathToFile(String nameFile) {
+        FileSystem fs = FileSystems.getDefault();
+        Path path1 = fs.getPath(nameFile);
+        String absolutePath = path1.toAbsolutePath().toString();
+        return Paths.get(absolutePath);
+    }
+
+    public void deleteDirectories(String directoryName) {
+        Path directoryToDelete = getPathToFile(directoryName);
+        try {
+            Files.walkFileTree(directoryToDelete, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

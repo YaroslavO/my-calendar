@@ -8,16 +8,14 @@ import java.util.List;
  * Created by employee on 5/25/15.
  */
 public class CustomerCalendar {
-    private String task;
     private List<YearCalendar> listYear;
 
-    public CustomerCalendar(String task) {
-        this.task = task;
+    public CustomerCalendar() {
         listYear = new ArrayList<>();
     }
 
-    public void init() {
-        for (String targetYear: task.split("\n")) {
+    public void init(List<String> taskYear) {
+        for (String targetYear: taskYear) {
             YearCalendar yearCalendar = new YearCalendar();
             yearCalendar.init(targetYear);
             listYear.add(yearCalendar);
