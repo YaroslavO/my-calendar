@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,11 @@ import java.util.stream.Collectors;
  * Created by Yaroslav on 21.05.2015.
  */
 public class FileManager {
+
+
+    public final static String MAIN_DIRECTORY = "calendar";
+    public static final String EXTENSION = ".html";
+    public static final String NAME_FILE = "my-app.iml";
 
     public void saveToFile(String fileName, String content) {
         String[] partPath = fileName.split(File.separator);
@@ -76,8 +82,8 @@ public class FileManager {
         return Paths.get(absolutePath);
     }
 
-    public void deleteDirectories(String directoryName) {
-        Path directoryToDelete = getPathToFile(directoryName);
+    public void deleteDirectories() {
+        Path directoryToDelete = getPathToFile(MAIN_DIRECTORY);
         try {
             Files.walkFileTree(directoryToDelete, new SimpleFileVisitor<Path>() {
                 @Override
@@ -96,5 +102,22 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public String getPathFileByDate(Calendar date) {
+        return MAIN_DIRECTORY + File.separator +
+                date.get(Calendar.YEAR) + File.separator +
+                (date.get(Calendar.MONTH) + 1) + EXTENSION;
+    }
+
+    public String getPathToCreateDirectory() {
+        FileManager fileManager = new FileManager();
+
+        String filePath = fileManager.getPathToFile(NAME_FILE).toString();
+        filePath = filePath.substring(0, filePath.lastIndexOf(File.separator));
+
+        return filePath + File.separator;
     }
 }

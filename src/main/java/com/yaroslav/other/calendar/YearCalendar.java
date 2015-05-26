@@ -30,24 +30,24 @@ public class YearCalendar {
 
     private void createSomeMonth(String[] parseYear) {
         for (int month = 1; month < parseYear.length; month++) {
-            MonthCalendar monthCalendar = new MonthCalendar();
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, this.name);
             calendar.set(Calendar.MONTH, getMonth(parseYear[month]));
             calendar.set(Calendar.DAY_OF_MONTH, 1);
-            monthCalendar.init(calendar);
+            MonthCalendar monthCalendar = new MonthCalendar(calendar);
+
             months.add(monthCalendar);
         }
     }
 
     private void createAllYear() {
         for (int month = 0; month < 12; month++) {
-            MonthCalendar monthCalendar = new MonthCalendar();
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, this.name);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, 1);
-            monthCalendar.init(calendar);
+            MonthCalendar monthCalendar = new MonthCalendar(calendar);
+
             months.add(monthCalendar);
         }
     }

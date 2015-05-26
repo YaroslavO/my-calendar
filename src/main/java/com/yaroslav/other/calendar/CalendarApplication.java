@@ -1,7 +1,7 @@
 package com.yaroslav.other.calendar;
 
 import com.yaroslav.other.calendar.view.year.CalendarRenderer;
-import com.yaroslav.other.calendar.view.year.HTMLAbstractYearCalendarRendererToFile;
+import com.yaroslav.other.calendar.view.year.HTMLYearCalendarRendererToFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,10 +29,10 @@ public class CalendarApplication {
             System.out.println(e.getMessage());
         }
 
-        CustomerCalendar calendar = new CustomerCalendar();
+        CustomCalendar calendar = new CustomCalendar();
         calendar.init(listYearAndMonth);
 
-        CalendarRenderer calendarRenderer = new HTMLAbstractYearCalendarRendererToFile();
+        CalendarRenderer calendarRenderer = new HTMLYearCalendarRendererToFile();
         calendarRenderer.render(calendar);
     }
 }
