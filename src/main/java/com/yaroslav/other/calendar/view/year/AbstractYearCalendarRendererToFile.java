@@ -18,7 +18,7 @@ import java.util.List;
 public abstract class AbstractYearCalendarRendererToFile implements CalendarRenderer  {
     public final static String MAIN_DIRECTORY = "calendar";
     public static final String EXTENSION = ".html";
-    public static final String NaME_FILE = "my-app.iml";
+    public static final String NAME_FILE = "my-app.iml";
 
     @Override
     public void render(CustomerCalendar customerCalendar) {
@@ -37,6 +37,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
         String link = "";
         String linkNext = "";
         String linkPrevious = "";
+
         for (MonthCalendar monthCalendar: yearCalendar.getMonths()) {
             if (isFirstMonth(numberLink)) {
                 link = links.get(numberLink);
@@ -45,17 +46,18 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
             }
 
             if (isLinkInMidYear(links, numberLink)) {
+                linkPrevious = links.get(numberLink - 1);
                 link = links.get(numberLink);
                 linkNext = links.get(numberLink + 1);
             }
 
             if (isLastMonth(links, numberLink)) {
+                linkPrevious = links.get(numberLink - 1);
                 link = links.get(numberLink);
                 linkNext = links.get(0);
             }
 
             saveRenderToFile(link, linkNext, linkPrevious, monthCalendar);
-            linkPrevious = link;
             numberLink++;
         }
 
@@ -63,7 +65,15 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
     }
 
     private boolean isLinkInMidYear(List<String> links, int numberLink) {
-        return numberLink < links.size() - 1;
+        return (numberLink < links.size() - 1) && (numberLink != 0);
+    }
+
+    private boolean isLastMonth(List<String> links, int numberLink) {
+        return numberLink == links.size() - 1;
+    }
+
+    private boolean isFirstMonth(int numberLink) {
+        return numberLink == 0;
     }
 
     private void saveRenderToFile(String link, String linkNext, String linkPrevious, MonthCalendar monthCalendar) {
@@ -80,17 +90,9 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
     }
 
     private String getPathToCreateDirectory(FileManager fileManager) {
-        String filePath = fileManager.getPathToFile(NaME_FILE).toString();
+        String filePath = fileManager.getPathToFile(NAME_FILE).toString();
         filePath = filePath.substring(0, filePath.lastIndexOf(File.separator));
         return filePath;
-    }
-
-    private boolean isLastMonth(List<String> links, int numberLink) {
-        return numberLink == links.size() - 1;
-    }
-
-    private boolean isFirstMonth(int numberLink) {
-        return numberLink == 0;
     }
 
     private List<String> getListLink(List<YearCalendar> listYear) {
