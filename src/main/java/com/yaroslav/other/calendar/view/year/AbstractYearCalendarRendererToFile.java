@@ -46,6 +46,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
 
         saveRenderToFile(navigator, monthCalendar);
         numberLink++;
+
         return numberLink;
     }
 
@@ -81,6 +82,7 @@ public abstract class AbstractYearCalendarRendererToFile implements CalendarRend
                         monthCalendar.getDate().get(Calendar.MONTH) + EXTENSION);
             }
         }
+
         return linkList;
     }
 
