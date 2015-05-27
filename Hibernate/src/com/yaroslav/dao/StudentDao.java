@@ -1,11 +1,10 @@
-package com.yaroslav;
+package com.yaroslav.dao;
 
 import com.yaroslav.entitys.Student;
 import com.yaroslav.util.HibernateUtil;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

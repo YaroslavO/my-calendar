@@ -21,6 +21,7 @@ public class Exam {
     private double rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_student")
     private Student student;
 
     public int getId() {
@@ -45,6 +46,19 @@ public class Exam {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    @Override
+    public String toString() {
+        return title + " rating = " + rating;
     }
 }
 

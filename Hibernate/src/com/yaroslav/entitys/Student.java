@@ -29,6 +29,7 @@ public class Student {
     private double mark;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exam> exams;
 
     public int getId() {
@@ -73,12 +74,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", mark=" + mark +
-                ", exams=" + exams +
-                '}';
+        return firstName + " " + lastName + " mark = " + mark +
+                " \nexams= " + exams;
     }
 }
