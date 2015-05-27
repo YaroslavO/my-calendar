@@ -1,6 +1,10 @@
-package com.yaroslav.entity;
+package com.yaroslav.entitys;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by employee on 5/27/15.
@@ -23,6 +27,9 @@ public class Student {
 
     @Column(name = "mark")
     private double mark;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private List<Exam> exams;
 
     public int getId() {
         return id;
@@ -54,5 +61,24 @@ public class Student {
 
     public void setMark(double mark) {
         this.mark = mark;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mark=" + mark +
+                ", exams=" + exams +
+                '}';
     }
 }

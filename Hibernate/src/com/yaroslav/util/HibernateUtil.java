@@ -35,6 +35,6 @@ public class HibernateUtil {
     }
 
     public Session getSession() {
-        return sessionFactory.getCurrentSession();
+        return sessionFactory.openSession();
     }
 }
