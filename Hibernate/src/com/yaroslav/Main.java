@@ -18,42 +18,27 @@ public class Main {
     public static void main(String[] args) throws Exception {
         StudentDao studentDao = new StudentDao();
 
+        List<Exam> examinationsForStudents = createAllExam();
+
         Student student = createStudent("Yaroslav", "Olenenko");
         studentDao.saveStudent(student);
+        getResultExamPeriodForStudent(student, examinationsForStudents);
 
         student = createStudent("Dimmu", "Smagloc");
         studentDao.saveStudent(student);
+        getResultExamPeriodForStudent(student, examinationsForStudents);
 
         student = createStudent("Vladislav", "Kirilenko");
         studentDao.saveStudent(student);
-
-        List<Exam> examinationsForStudents = createAllExam();
+        getResultExamPeriodForStudent(student, examinationsForStudents);
 
         List<Student> students = studentDao.getAllStudent();
 
         for (Student eachStudent: students) {
-            getResultSessionForStudent(examinationsForStudents, eachStudent);
-        }
-
-        students = studentDao.getAllStudent();
-
-        for (Student eachStudent: students) {
-            List<Exam> studentExams = new ArrayList<Exam>(eachStudent.getExams());
-            eachStudent.setMark(getAverageMark(studentExams));
             System.out.println(eachStudent);
         }
 
         HibernateUtil.close();
-    }
-
-    public static double getAverageMark(List<Exam> exams) {
-        double sum = 0.0;
-
-        for (Exam exam: exams) {
-            sum += exam.getRating();
-        }
-
-        return sum / (exams.size() * 1.0);
     }
 
     private static List<Exam> createAllExam() {
@@ -73,7 +58,7 @@ public class Main {
         return examinationsForStudents;
     }
 
-    private static void getResultSessionForStudent(List<Exam> exams, Student student) {
+    private static void getResultExamPeriodForStudent(Student student, List<Exam> exams) {
         ExamDao examDao = new ExamDao();
 
         for (Exam exam: exams) {

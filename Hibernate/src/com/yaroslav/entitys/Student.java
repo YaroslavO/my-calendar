@@ -1,5 +1,6 @@
 package com.yaroslav.entitys;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -11,12 +12,12 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_sutdent")
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
 
     @Column(name = "first_name")
@@ -25,12 +26,20 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "mark")
-    private double mark;
+    @Formula("(select avg(exams.rating) from exams where exams.fk_student = id)")
+    private Double averageMark;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exam> exams;
+
+    public double getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(double averageMark) {
+        this.averageMark = averageMark;
+    }
 
     public int getId() {
         return id;
@@ -56,14 +65,6 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public double getMark() {
-        return mark;
-    }
-
-    public void setMark(double mark) {
-        this.mark = mark;
-    }
-
     public List<Exam> getExams() {
         return exams;
     }
@@ -74,7 +75,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " mark = " + mark +
+        return firstName + " " + lastName + " mark = " + getAverageMark() +
                 " \nexams= " + exams;
     }
 }
