@@ -37,4 +37,12 @@ public class WeekDay {
     public boolean isTheCurrentDay() {
         return week.getDate().compareTo(day) == 0;
     }
+
+    public boolean isWeekDay() {
+        return type.isWeekendDay() && !isOtherMonth() && !isTheCurrentDay();
+    }
+
+    public boolean isHolidays() {
+        return !type.isWeekendDay() && !isTheCurrentDay() && !isOtherMonth();
+    }
 }

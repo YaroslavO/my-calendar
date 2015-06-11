@@ -37,6 +37,15 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <file>${basedir}/classes/artifacts/my_app_jar/my-app.jar</file>
+                    <goal>generate-sources</goal>
+                </configuration>
+            </plugin>
+            <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
